@@ -2,3 +2,5 @@ Header add Tk "N"
 Header add X-Powered-By "Hamster in a wheel"
 Header add X-XSS-Protection "X-XSS-Protection: 1; mode=block"
 
+RedirectMatch 301 ^/(erdet)?bedstforalle(.*) /ErDetBedstForAlle/$1
+

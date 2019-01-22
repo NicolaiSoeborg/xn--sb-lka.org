@@ -1,0 +1,3 @@
+[submodule "ErDetBedstForAlle"]
+	path = ErDetBedstForAlle
+	url = git@github.com:NicolaiSoeborg/ErDetBedstForAlle.git

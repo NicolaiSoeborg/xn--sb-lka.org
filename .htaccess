@@ -2,5 +2,8 @@ Header add Tk "N"
 Header add X-Powered-By "Hamster in a wheel"
 Header add X-XSS-Protection "X-XSS-Protection: 1; mode=block"
 
+# Block anything git related
+RedirectMatch 403 .git.*
+
 RedirectMatch 301 ^/(erdet)?bedstforalle(.*) /ErDetBedstForAlle/$1
 

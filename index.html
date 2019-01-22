@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Index :: Søborg</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <script src="https://cdn.rawgit.com/Haeresis/konami-code-js/master/src/konami-code.js"></script>
+  <script>(new KonamiCode).setCallback(function(e){!function(){function e(e){var t,n={height:(t=e).offsetHeight,width:t.offsetWidth};return a<n.height&&n.height<s&&i<n.width&&n.width<r}function n(){for(var e=document.getElementsByClassName(d),t=new RegExp("\\b"+d+"\\b");0<e.length;)e[0].className=e[0].className.replace(t,"")}for(var t,o,a=30,i=30,s=350,r=350,d="mw-harlem_shake_me",m="im_first",l=["im_drunk","im_baked","im_trippin","im_blown"],c="mw-strobe_light",u="mw_added_css",h=(t=document.documentElement,window.innerWidth?window.innerHeight:t&&!isNaN(t.clientHeight)?t.clientHeight:0),f=window.pageYOffset?window.pageYOffset:Math.max(document.documentElement.scrollTop,document.body.scrollTop),p=document.getElementsByTagName("*"),g=null,w=0;w<p.length;w++){if(e(E=p[w])&&(void 0,o=function(e){for(var t=e,n=0;t;)n+=t.offsetTop,t=t.offsetParent;return n}(E),f<=o&&o<=h+f)){g=E;break}}if(null!==E){var b,y;(b=document.createElement("link")).setAttribute("type","text/css"),b.setAttribute("rel","stylesheet"),b.setAttribute("href","https://s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css"),b.setAttribute("class",u),document.body.appendChild(b),(y=document.createElement("audio")).setAttribute("class",u),y.src="https://s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3",y.loop=!1,y.addEventListener("canplay",function(){setTimeout(function(){g.className+=" "+d+" "+m},500),setTimeout(function(){var e;n(),(e=document.createElement("div")).setAttribute("class",c),document.body.appendChild(e),setTimeout(function(){document.body.removeChild(e)},100);for(var t=0;t<v.length;t++)v[t].className+=" "+d+" "+l[Math.floor(Math.random()*l.length)]},15500)},!0),y.addEventListener("ended",function(){n(),function(){for(var e=document.getElementsByClassName(u),t=0;t<e.length;t++)document.body.removeChild(e[t])}()},!0),y.innerHTML=" <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>",document.body.appendChild(y),y.play();var v=[];for(w=0;w<p.length;w++){var E;e(E=p[w])&&v.push(E)}}else console.warn("Could not find a node of the right size. Please try a different page.")}()});</script>
+
+</head>
+<body>
+<div class="container">
+  <h2>Index</h2>
+  <ul class="list-group">
+	<li class="list-group-item">
+		<a href="https://nicolaisoeborg.github.io/badger/">Badger</a> (old), &nbsp;
+		<a href="https://badger.xn--sb-lka.org/">Badger2</a> <span style="color:red">(new!)</span>
+	</li>
+	<li class="list-group-item"><a href="https://github.com/SMRaadet/Overlevering/wiki">S/M Wiki</a></li>
+	<li class="list-group-item"><a href="https://kb.xn--sb-lka.org/">Er kælderbaren åben?</a></li>
+	<li class="list-group-item"><a href="https://github.com/NicolaiSoeborg/flappy-Gr-nborg">Flappy Grønborg</a></li>
+  </ul>
+  <hr id="splitter" class="hidden"/>
+<script>
+const splitter = document.getElementById("splitter"),
+  donation = document.createElement("p");
+
+const goodCorps = [
+  {title: 'Mozilla', url: 'https://donate.mozilla.org/'},
+  {title: 'Let\'s Encrypt', url: 'https://letsencrypt.org/donate/'},
+  {title: 'Electronic Frontier Foundation', url: 'https://supporters.eff.org/donate/'},
+  {title: 'The Tor Project', url: 'https://donate.torproject.org/'},
+  {title: 'International Consortium of Investigative Journalists (ICIJ)', url: 'https://www.icij.org/donate/'},
+  {title: 'Python Software Foundation', url: 'https://www.python.org/psf/donations/'},
+];
+
+const rand = goodCorps[Math.floor(Math.random() * goodCorps.length)];
+donation.innerHTML = `Consider giving a donating to: <a href="${rand.url}">${rand.title}</a>. Thanks!`;
+
+splitter.classList.remove("hidden");
+splitter.parentElement.appendChild(donation);
+
+</script>
+  <!-- Gamle events:
+  <hr/>
+  <h3>Best of Mat1 i Auditorie 81</h3>
+  <ul class="list-group">
+    <li class="list-group-item"><a href="https://www.facebook.com/events/459509117872655/">Facebook event</a></li>
+    <li class="list-group-item"><a href="Mat1-drukspillet.pdf">Mat1-drukspillet.pdf</a></li>
+  </ul>
+  -->
+</div>
+</body>
+</html>

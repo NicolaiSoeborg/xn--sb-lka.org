@@ -4,6 +4,8 @@ Header add Tk "N"
 Header add X-Powered-By "Hamster in a wheel"
 Header add X-XSS-Protection "X-XSS-Protection: 1; mode=block"
 
+ErrorDocument 404 /404.html
+
 # Block anything git related
 RedirectMatch 403 .git.*
 

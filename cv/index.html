@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Resumé :: Søborg</title>
+    <meta name="description" content="Nicolai Søborgs Resumé">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="custom.css" rel="stylesheet">
+
+    <script>
+        function changeTheme() {
+            const invert = '-webkit-filter: invert(100%); -moz-filter: invert(100%); -o-filter: invert(100%); -ms-filter: invert(100%);';
+						if (document.getElementsByTagName('body')[0].style.backgroundColor !== 'black') {
+								document.getElementsByTagName('body')[0].style.cssText = ' background-color: black; ' + invert;
+								document.getElementById("meImg").style.cssText = invert;
+                document.getElementById("changeThemeBtn").textContent = "light mode";
+            } else {
+                document.getElementsByTagName('body')[0].style.cssText = '';
+								document.getElementById("meImg").style.cssText = '';
+                document.getElementById("changeThemeBtn").textContent = "night mode";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <a id="changeThemeBtn" href="#" style="float: right" onclick="changeTheme()">night mode</a>
+    <div class="container">
+        <div class="resume">
+            <div class="biography">
+                <div class="name">Nicolai Søborg</div>
+                <div class="biography-info">
+                    <span class="fas fa-user-graduate icon"></span> M.Sc. in Information Technology
+                </div>
+                <div class="biography-info">
+                    <span class="fas fa-user-secret icon"></span> <a href="https://xn--sb-lka.org/pub.asc">PGP key</a> | <a href="https://keybase.io/nico_">keybase</a>
+                </div>
+                <div class="biography-info">
+                    <span class="fa fa-envelope icon"></span> &#99;&#118;&#64;xn--sb-lka.org
+                </div>
+                <div class="biography-info">
+                    <span class="fab fa-github icon"></span> <a href="https://github.com/NicolaiSoeborg/">github.com/NicolaiSoeborg</a>
+                </div>
+                <!--<div class="biography-info">
+                    <span class="fab fa-phone icon"></span> +45 XX XX XX XX
+                </div>-->
+            </div><!-- /.biography -->
+            <div class="image">
+                <img id="meImg" src="me.png" width="148" height="148" class="img-circle" alt="One good looking picture of me." />
+            </div>
+            <div class="summary">
+                TODO
+            </div>
+
+            <h3><span class="fa fa-graduation-cap"></span> Education</h3>
+            <div class="exp">
+                <div class="exp-company">
+                    Master Degree
+                </div>
+                <div class="exp-facts">
+                    <span class="fa fa-map-marker"></span> Technical University of Denmark
+                    <br>
+                    <span class="fa fa-calendar"></span> 2017 &mdash; 2019
+                </div>
+                <div class="exp-facts">
+                    <span class="fa fa-wrench"></span> Python3, Java, Linux
+                </div>
+                <div>
+                    TODO.
+                </div>
+            </div>
+            <div class="exp">
+                <div class="exp-company">
+                    Bachelor Degree
+                </div>
+                <div class="exp-facts">
+                    <span class="fa fa-map-marker"></span> Technical University of Denmark
+                    <br>
+                    <span class="fa fa-calendar"></span> 2013 &mdash; 2017
+                </div>
+                <div class="exp-facts">
+                    <span class="fa fa-wrench"></span> Java, Python, C, F#
+                </div>
+                <div>
+                    TODO
+                </div>
+            </div>
+
+            <h3><span class="fa fa-suitcase"></span> Work Experience</h3>
+            <div class="exp">
+                <div class="exp-company">
+                    <span style="font-size: 16px">Novozymes</span> <a href="https://novozymes.com" target="_blank"><span class="fa fa-external-link"></span></a>
+                </div>
+                <div class="exp-facts">
+                    <span class="fa fa-map-marker"></span> Bagsværd
+                    <br>
+                    <span class="fa fa-calendar"></span> XX/2016 – XX/2019
+                </div>
+                <div class="exp-facts">
+                    <span class="fa fa-user"></span> Student helper (SysOp)
+                    <br>
+                    <span class="fa fa-wrench"></span> Python, Bash, JS, Linux
+                </div>
+                <div class="exp-summary">
+                    Creating an internal tool for searching in terabyte large databases of proteins used by scientists and bioinformatics.
+                    <ul>
+                        <li>Mainly focused on backend implementation in Python and Django</li>
+                        <li>Distributed big data storage using HBase and Hadoop </li>
+                        <li>Some frontend adjustment in JavaScript and React</li>
+                        <li>Develop and test environment set up in Docker</li>
+                        <li>Purely Linux based ecosystem</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3><span class="fas fa-hashtag"></span> Mentions</h3>
+            <div class="exp-summary">
+                <ul>
+                    <li><a href="https://www.infosecurity.dk/seminar/S207" target="_blank">Paneldebat: Hvordan tiltrækker vi it-studerende til it-sikkerhedsfaget?</a></li>
+                    <li>Key note presentation at <a href="https://web.archive.org/web/20190410173951/https://www.conferencemanager.dk/smartcitycybersecurityhack/programme.html" target="_blank">Smart City & Cyber Security Hack 2019</a></li>
+                    <li><a href="https://www.dr.dk/tv/se/21-soendag/21-soendag-dr1/21-soendag-2018-10-21" target="_blank">DR: 21 Søndag</a> (21. okt. 2018)</li>
+                    <li>&ldquo;<a href="https://fe-ddis.dk/Nyheder/nyhedsarkiv/2018/Pages/Cyberlandsholdet_k%C3%A6mpeoplevelse.aspx" target="_blank"><i>Cyberlandsholdet har været en kæmpe oplevelse [...]</i></a>&rdquo; siger Nicolai Søborg, som er holdkaptajn for Cyberlandsholdet (2018).</li>
+                    <li><a href="https://fe-ddis.dk/Cyberlandsholdet/Pages/Cyberlandsholdet2017.aspx" target="_blank">SysOp på Cyberlandsholdet 2017</a></li>
+                </ul>
+            </div>
+
+            <h3><span class="fa fa-wrench"></span> Technologies</h3>
+            <div>I have <span title="... and like">experience</span> working with the following technologies:
+                <ul style="columns: 2">
+                    <li>Python3</li>
+                    <li>Linux</li>
+                    <li>git</li>
+                    <li>SQL</li>
+                    <li>JavaScript</li>
+                    <li>Bash scripting</li>
+                    <li>...</li>
+                </ul>
+                But am willing to learn new tools, languages, and <span title="or am I?">platforms</span>.
+            </div>
+
+        </div><!-- /.resume -->
+    </div><!-- /.container -->
+</body>
+
+</html>

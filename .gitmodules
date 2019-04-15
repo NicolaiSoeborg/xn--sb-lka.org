@@ -1,3 +1,6 @@
 [submodule "ErDetBedstForAlle"]
 	path = xn--sb-lka.org/ErDetBedstForAlle
 	url = git@github.com:NicolaiSoeborg/ErDetBedstForAlle.git
+[submodule "badger.xn--sb-lka.org"]
+	path = badger.xn--sb-lka.org
+	url = git@github.com:NicolaiSoeborg/badger.git

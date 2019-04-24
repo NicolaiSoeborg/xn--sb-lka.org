@@ -10,46 +10,46 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
     <style>
-        div.resume { padding-top:10px }
-        .image { float:left; text-align:center; padding-right:20px }
-        .img-circle { border-radius:50% }
-        div.name { font-size:20px; padding-bottom:5px }
-        div.biography { font-style:italic }
-        div.summary { padding-top:10px; display:block }
-        .exp { margin-bottom:35px }
-        .exp-company { font-size:20px; font-weight:700; vertical-align:top; width:25%; display:inline-block }
-        .exp-facts { color:#aaa; font-size:12px; display:inline-block; width:35% }
-        .exp-summary { display:block}h3 { color:#8c271e }
-        h3 .fa { width:1.5em; margin-top:10px }
-        .fa { width:1em;text-align:center }
-        @media (min-width:1200px) { .container{max-width:970px} }
-        @media print { a[href]:after{content:none} }
+        div.resume { padding-top: 10px }
+        .image { float: left; text-align: center; padding-right: 20px }
+        .img-circle { border-radius: 50% }
+        div.name { font-size: 20px; padding-bottom: 5px }
+        div.biography { font-style: italic }
+        div.summary { padding-top: 10px; display: block }
+        .exp { margin-bottom: 35px }
+        .exp-company { font-size: 20px; font-weight: 700; vertical-align: top; width: 25%; display: inline-block }
+        .exp-facts { color: #aaa; font-size: 12px; display: inline-block; width: 35% }
+        .exp-summary { display: block }
+        h3 { color: #8c271e }
+        h3 .fa { width: 1.5em; margin-top: 10px }
+        .fa { width: 1em; text-align: center }
+        @media (min-width:1200px) { .container { max-width: 970px } }
+        @media print { a[href]:after { content: none } }
     </style>
 
     <script>
         function changeTheme() {
             const invert = '-webkit-filter: invert(100%); -moz-filter: invert(100%); -o-filter: invert(100%); -ms-filter: invert(100%);';
-						if (document.getElementsByTagName('body')[0].style.backgroundColor !== 'black') {
-								document.getElementsByTagName('body')[0].style.cssText = ' background-color: black; ' + invert;
-								document.getElementById("meImg").style.cssText = invert;
+            if (document.getElementsByTagName('body')[0].style.backgroundColor !== 'black') {
+                document.getElementsByTagName('body')[0].style.cssText = ' background-color: black; ' + invert;
+                document.getElementById("meImg").style.cssText = invert;
                 document.getElementById("changeThemeBtn").textContent = "light mode";
             } else {
                 document.getElementsByTagName('body')[0].style.cssText = '';
-								document.getElementById("meImg").style.cssText = '';
+                document.getElementById("meImg").style.cssText = '';
                 document.getElementById("changeThemeBtn").textContent = "night mode";
             }
         }
     </script>
 </head>
-
 <body>
     <a id="changeThemeBtn" href="#" style="float: right" onclick="changeTheme()">night mode</a>
     <div class="container">
         <div class="resume">
             <div class="name">Nicolai Søborg</div>
             <div class="image">
-                <img id="meImg" src="me.png" width="148" height="148" class="img-circle" alt="One good looking picture of me." />
-            </div>        
+                <img id="meImg" src="me.png" width="148" height="148" class="img-circle" alt="A good looking picture of me." />
+            </div>
             <div class="biography">
                 <span class="fas fa-user-graduate icon"></span> M.Sc. in Information Technology
             </div>
@@ -106,7 +106,7 @@
             <h3><span class="fa fa-suitcase"></span> Work Experience</h3>
             <div class="exp">
                 <div class="exp-company">
-                    <span style="font-size: 16px">Novozymes</span> <a href="https://novozymes.com" target="_blank"><span class="fa fa-external-link"></span></a>
+                    <span style="font-size: 16px">Novozymes</span> <a href="https://novozymes.com"><span class="fa fa-external-link"></span></a>
                 </div>
                 <div class="exp-facts">
                     <span class="fa fa-map-marker"></span> Bagsværd
@@ -119,8 +119,7 @@
                     <span class="fa fa-wrench"></span> Python, Bash, JS, Linux
                 </div>
                 <div class="exp-summary">
-                    I mostly automated checks to make sure everything was running as expected
-                    and helped develop an internal tool to search in terabytes of proteins/dna.
+                    I mostly automated checks to make sure everything was running as expected and helped develop an internal tool to search in terabytes of proteins/dna.
                     <ul>
                         <li>Automation using Python3 and bash</li>
                         <li>RESTful Django web service</li>
@@ -134,12 +133,12 @@
             <h3><span class="fas fa-hashtag"></span> Mentions</h3>
             <div class="exp-summary">
                 <ul>
-                    <li><a href="https://www.infosecurity.dk/seminar/S207" target="_blank">Paneldebat: Hvordan tiltrækker vi it-studerende til it-sikkerhedsfaget?</a></li>
-                    <li>Key note presentation at <a href="https://web.archive.org/web/20190410173951/https://www.conferencemanager.dk/smartcitycybersecurityhack/programme.html" target="_blank">Smart City & Cyber Security Hack 2019</a></li>
-                    <li><a href="https://www.dr.dk/radio/p1/orientering/orientering-2018-TODO" target="_blank">P1: Orientering</a> (TODO 2018)</li>
-                    <li><a href="https://www.dr.dk/tv/se/21-soendag/21-soendag-dr1/21-soendag-2018-10-21" target="_blank">DR: 21 Søndag</a> (21. okt. 2018)</li>
-                    <li>&ldquo;<a href="https://fe-ddis.dk/Nyheder/nyhedsarkiv/2018/Pages/Cyberlandsholdet_k%C3%A6mpeoplevelse.aspx" target="_blank"><i>Cyberlandsholdet har været en kæmpe oplevelse [...]</i></a>&rdquo; siger Nicolai Søborg, som er holdkaptajn for Cyberlandsholdet (2018).</li>
-                    <li><a href="https://fe-ddis.dk/Cyberlandsholdet/Pages/Cyberlandsholdet2017.aspx" target="_blank">SysOp på Cyberlandsholdet 2017</a></li>
+                    <li><a href="https://www.infosecurity.dk/seminar/S207">Paneldebat: Hvordan tiltrækker vi it-studerende til it-sikkerhedsfaget?</a></li>
+                    <li>Key note presentation at <a href="https://web.archive.org/web/20190410173951/https://www.conferencemanager.dk/smartcitycybersecurityhack/programme.html">Smart City & Cyber Security Hack 2019</a></li>
+                    <li><a href="https://www.dr.dk/radio/p1/orientering/orientering-2018-TODO">P1: Orientering</a> (TODO 2018)</li>
+                    <li><a href="https://www.dr.dk/tv/se/21-soendag/21-soendag-dr1/21-soendag-2018-10-21">DR: 21 Søndag</a> (21. okt. 2018)</li>
+                    <li>&ldquo;<a href="https://fe-ddis.dk/Nyheder/nyhedsarkiv/2018/Pages/Cyberlandsholdet_k%C3%A6mpeoplevelse.aspx"><i>Cyberlandsholdet har været en kæmpe oplevelse [...]</i></a>&rdquo; siger Nicolai Søborg, som er holdkaptajn for Cyberlandsholdet (2018).</li>
+                    <li><a href="https://fe-ddis.dk/Cyberlandsholdet/Pages/Cyberlandsholdet2017.aspx">SysOp på Cyberlandsholdet 2017</a></li>
                 </ul>
             </div>
 
@@ -156,7 +155,6 @@
                 </ul>
                 But am willing to learn new tools, languages, and <span title="or am I?">platforms</span>.
             </div>
-
         </div><!-- /.resume -->
     </div><!-- /.container -->
 </body>

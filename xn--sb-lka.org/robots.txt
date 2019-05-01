@@ -1,0 +1,6 @@
+User-agent: Baidu
+Disallow: /
+
+User-agent: *
+Disallow: /Mat1-drukspillet.pdf
+

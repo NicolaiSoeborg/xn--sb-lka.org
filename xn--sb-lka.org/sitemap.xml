@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+<url>
+  <loc>https://xn--sb-lka.org/</loc>
+  <priority>0.80</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>https://xn--sb-lka.org/cv/index.html</loc>
+  <priority>0.70</priority>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://søb.org/ErDetBedstForAlle/</loc>
+  <priority>0.40</priority>
+  <changefreq>yearly</changefreq>
+</url>
+<url>
+  <loc>https://søb.org/pub.asc</loc>
+  <priority>0.40</priority>
+  <changefreq>yearly</changefreq>
+</url>
+
+</urlset>

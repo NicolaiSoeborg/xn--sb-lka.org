@@ -3,8 +3,6 @@ AddDefaultCharset UTF-8
 Header add Tk "N"
 Header add X-Powered-By "Hamster in a wheel"
 Header add X-XSS-Protection "X-XSS-Protection: 1; mode=block"
-Header add Expect-CT "max-age=604800, report-uri=\"https://hello.report-uri.com/r/d/ct/reportOnly\""
-Header add Report-To "{\"group\":\"default\",\"max_age\":31536000,\"endpoints\":[{\"url\":\"https://hello.report-uri.com/a/d/g\"}],\"include_subdomains\":true}"
 
 ErrorDocument 404 /404.html
 

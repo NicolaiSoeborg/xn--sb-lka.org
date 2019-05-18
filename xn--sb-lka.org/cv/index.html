@@ -19,14 +19,16 @@
         .exp { margin-bottom: 35px }
         .exp-company { font-size: 20px; font-weight: 700; vertical-align: top; width: 25%; display: inline-block }
         .exp-facts { color: #aaa; font-size: 12px; display: inline-block; width: 35% }
-        .exp-summary { display: block }
+        .exp-summary { padding-top: 5px; display: block }
         h3 { color: #8c271e }
         h3 .fa { width: 1.5em; margin-top: 10px }
         .fa { width: 1em; text-align: center }
         @media (min-width:1200px) { .container { max-width: 970px } }
-        @media print { a[href]:after { content: none } }
+        @media print {
+            .no-print, .no-print * { display: none !important; }
+            a[href]:after { content: none }
+        }
     </style>
-
     <script>
         function changeTheme() {
             const invert = '-webkit-filter: invert(100%); -moz-filter: invert(100%); -o-filter: invert(100%); -ms-filter: invert(100%);';
@@ -43,7 +45,7 @@
     </script>
 </head>
 <body>
-    <a id="changeThemeBtn" href="#" style="float: right" onclick="changeTheme()">night mode</a>
+    <a id="changeThemeBtn" class="no-print" href="#" style="float: right" onclick="changeTheme()">night mode</a>
     <div class="container">
         <div class="resume">
             <div class="name"><strong>Nicolai Søborg</strong></div>
@@ -53,7 +55,7 @@
             <div class="biography">
                 <span class="fas fa-user-graduate icon"></span> M.Sc. in Information Technology
             </div>
-            <div class="biography">
+            <div class="biography no-print">
                 <span class="fas fa-user-secret icon"></span> <a href="https://xn--sb-lka.org/pub.asc">PGP key</a> | <a href="https://keybase.io/nico_">keybase</a>
             </div>
             <div class="biography">
@@ -66,7 +68,9 @@
                 <span class="fab fa-phone icon"></span> +45 XX XX XX XX
             </div>-->
             <div class="summary">
-                TODO: summary
+                Software student currently doing my master at DTU.
+                Interested in practical cryptology and cyber security.
+                Looking for jobs starting in August 2019.
             </div>
             <br/>
             <h3><span class="fa fa-graduation-cap"></span> Education</h3>
@@ -119,13 +123,15 @@
                     <span class="fa fa-wrench"></span> Python, Bash, JS, Linux
                 </div>
                 <div class="exp-summary">
-                    I mostly automated checks to make sure everything was running as expected and helped develop an internal tool to search in terabytes of proteins/dna.
+                    I mostly automated checks to monitor that everything was running as expected.
+                    Did a lot of packaging bio tools to <code>.deb</code> packages.
+                    And helped develop an internal tool to search in terabytes of proteins/dna/genomes.
                     <ul>
                         <li>Automation using Python3 and bash</li>
                         <li>RESTful Django web service</li>
                         <li>Frontend in React (JavaScript)</li>
                         <li>Distributed big data storage using HBase and Hadoop </li>
-                        <li>Purely Linux based ecosystem</li>
+                        <li>Purely Linux (Ubuntu) based ecosystem</li>
                     </ul>
                 </div>
             </div>
@@ -140,7 +146,7 @@
                     <li>SQL</li>
                     <li>JavaScript</li>
                     <li>Bash scripting</li>
-                    <li>...</li>
+                    <li>&hellip;</li>
                 </ul>
                 But am willing to learn new tools, languages, and <span title="or am I?">platforms</span>.
             </div>

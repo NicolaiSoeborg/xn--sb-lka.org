@@ -16,7 +16,7 @@
         div.name { font-size: 20px; padding-bottom: 5px }
         div.biography { font-style: italic }
         div.summary { padding-top: 10px; display: block }
-        .exp { margin-bottom: 35px }
+        .exp { page-break-inside: avoid; margin-bottom: 35px }
         .exp-company { font-size: 20px; font-weight: 700; vertical-align: top; width: 25%; display: inline-block }
         .exp-facts { color: #888; font-size: 12px; display: inline-block; width: 35% }
         .exp-summary { padding-top: 8px; display: block }
@@ -28,6 +28,8 @@
             .no-print, .no-print * { display: none !important; }
             a[href]:after { content: none }
         }
+
+        /* TODO: page-break-after: avoid;  */
     </style>
     <script>
         function changeTheme(forceTheme = undefined) {
@@ -62,7 +64,7 @@
                 <span class="fa fa-envelope fa-fw icon"></span> &nbsp;&#99;&#118;&#64;xn--sb-lka.org
             </div>
             <div class="biography">
-                <span class="fab fa-github fa-fw icon"></span> <a href="https://github.com/NicolaiSoeborg/">NicolaiSoeborg</a>
+                <span class="fab fa-github fa-fw icon"></span> <a href="https://github.com/NicolaiSoeborg/">github.com/NicolaiSoeborg</a>
             </div>
             <!--<div class="biography">
                 <span class="fab fa-phone icon"></span> +45 XX XX XX XX
@@ -70,8 +72,8 @@
             <div class="summary">
                 <!--Software student currently doing my master at DTU.<br/>-->
                 Open-source enthusiast.<br/>
-                Interested in practical cryptology and cyber security.<br/>
-                Looking for jobs starting in August 2019.
+                Interested in cyber security and practical cryptology.<br/>
+                <!--Looking for jobs starting in August 2019.-->
             </div>
             <br/>
             <h3><span class="fa fa-graduation-cap"></span> Education</h3>
@@ -90,7 +92,9 @@
                     <span class="fa fa-wrench"></span> Python3, Java, Linux
                 </div>
                 <div>
-                    TODO: description
+                    The title of my master thesis is &ldquo;Analyzing the security of IoT devices&rdquo; in which I wrote about when <a href="https://cwe.mitre.org/data/">weaknesses</a> turns into <a href="https://cve.mitre.org/">vulnerabilities</a>, using a lot of data from MITRE (CVE, CVSS, CWE & CAPEC).<br/>
+                    The grade for my thesis was 12 and my GPA during the master was 8.7.<br/>
+                    I had the following courses at DTU during my master:
                     <ul style="columns: 2; list-style: none; margin-left: 0">
                         <li><i class="fas fa-shield-alt fa-fw"></i> <a href="https://kurser.dtu.dk/course/01426" title="ECTS: 5">Cryptology 2</a></li>
                         <li><i class="fas fa-shield-alt fa-fw"></i> <a href="https://kurser.dtu.dk/course/02255" title="ECTS: 5">Practical Cryptology</a></li>
@@ -129,8 +133,9 @@
                     <span class="fa fa-wrench"></span> Java, Python, C, F#
                 </div>
                 <div>
-                    My bachelor was in <i>Software-Based Fault Tolerant Virtualization Layer Using Sector-Disk Codes</i>.<br/>
-                    I had the following courses at DTU:
+                    My bachelor was in &ldquo;Software-Based Fault Tolerant Virtualization Layer Using Sector-Disk Codes&rdquo;.<br/>
+                    GPA for bachelor: 7.8.<br/>
+                    I had the following courses at DTU during my bachelor:
                     <ul style="columns: 2; list-style: none; margin-left: 0">
                         <li><i class="fas fa-shield-alt fa-fw"></i> <a href="https://kurser.dtu.dk/course/01410" title="ECTS: 5">Cryptology 1</a></li>
 
@@ -161,10 +166,13 @@
                         <li><i class="fas fa-bong fa-fw"></i> <a href="https://kurser.dtu.dk/course/26027" title="ECTS: 5">Fundamental Chemistry</a></li>
                         <li><i class="fas fa-theater-masks fa-fw"></i> <a href="https://kurser.dtu.dk/course/42610" title="ECTS: 5">Philosophy of Science in Engineering</a></li>
                     </ul>
-                    And furthermore I did a special course about <a href="#" title="ECTS: 7.5.">Ensuring Properties of Solidity Contracts</a>.
+                    <!--And furthermore I did a special course about <a href="#" title="ECTS: 7.5.">Ensuring Properties of Solidity Contracts</a>.-->
+                    And furthermore I did a special course about &ldquo;Ensuring Properties of Solidity Contracts&rdquo;.
                 </div>
             </div>
-
+            
+            <div style="page-break-after: always;"></div>
+            
             <h3><span class="fa fa-suitcase"></span> Work Experience</h3>
             <div class="exp">
                 <div class="exp-company">
@@ -173,16 +181,16 @@
                 <div class="exp-facts">
                     <span class="fa fa-map-marker"></span> Bagsværd
                     <br>
-                    <span class="fa fa-calendar"></span> XX/2016 – 08/2019
+                    <span class="fa fa-calendar"></span> 02/2016 – 08/2019
                 </div>
                 <div class="exp-facts">
-                    <span class="fas fa-user-cog"></span> Student helper (SysOp)
+                    <span class="fas fa-user-cog"></span> Student helper (DevOps)
                     <br>
                     <span class="fa fa-wrench"></span> Python, Bash, JS, Linux
                 </div>
                 <div class="exp-summary">
                     I mostly automated checks to monitor that everything was running as expected.
-                    Did a lot of packaging bio tools to <code>.deb</code> packages.
+                    Did a lot of packaging (bio-)tools to <code>.deb</code> packages.
                     And helped develop an internal tool to search in terabytes of proteins/dna/genomes.
                     <ul>
                         <li>Automation using Python3 and bash</li>
@@ -191,42 +199,50 @@
                         <li>Distributed big data storage using HBase and Hadoop </li>
                         <li>Purely Linux (Ubuntu) based ecosystem</li>
                     </ul>
+                    I've learned a lot of practical debugging/bug-finding on a variation of different live systems.
                 </div>
             </div>
 
             <h3><span class="fa fa-wrench"></span> Technologies</h3>
-            <div class="exp-summary">
-                I have <span title="... and like">experience</span> working with the following technologies:
-                <ul style="columns: 2; list-style: none; margin-left: 0">
-                    <li><i class="fab fa-python fa-fw"></i> Python3</li>
-                    <li><i class="fab fa-linux fa-fw"></i> Linux</li>
-                    <li><i class="fas fa-code-branch  fa-fw"></i> git</li>
-                    <li><i class="fas fa-database fa-fw"></i> SQL</li>
-                    <li><i class="fab fa-js fa-fw"></i> JavaScript</li>
-                    <li><i class="fas fa-scroll fa-fw"></i> Bash scripting</li>
-                    <li>&nbsp;</li>
-                    <li title="...and much more">&hellip;</li>
-                </ul>
-                But am willing to learn new tools, languages, and <span title="or am I?">platforms</span>.
+            <div class="exp">
+                <div class="exp-summary">
+                    I have <span title="... and like">experience</span> working with the following technologies:
+                    <ul style="columns: 2; list-style: none; margin-left: 0">
+                        <li><i class="fab fa-python fa-fw"></i> Python3</li>
+                        <li><i class="fab fa-linux fa-fw"></i> Linux</li>
+                        <li><i class="fas fa-code-branch  fa-fw"></i> git</li>
+                        <li><i class="fas fa-database fa-fw"></i> SQL</li>
+                        <li><i class="fab fa-js fa-fw"></i> JavaScript</li>
+                        <li><i class="fas fa-scroll fa-fw"></i> Bash scripting</li>
+                        <li>&nbsp;</li>
+                        <li title="...and much more">&hellip;</li>
+                    </ul>
+                    But am willing to learn new tools, languages, and <span title="or am I?">platforms</span>.
+                </div>
             </div>
 
             <h3><span class="fas fa-hashtag"></span> Mentions</h3>
-            <div class="exp-summary">
-                <ul>
-                    <li><a href="https://www.infosecurity.dk/seminar/S207">Paneldebat: Hvordan tiltrækker vi it-studerende til it-sikkerhedsfaget?</a></li>
-                    <li>Key note presentation at <a href="https://web.archive.org/web/20190410173951/https://www.conferencemanager.dk/smartcitycybersecurityhack/programme.html">Smart City & Cyber Security Hack 2019</a></li>
-                    <li><a href="https://www.dr.dk/radio/p1/orientering/orientering-2018-TODO">P1: Orientering</a> (TODO 2018)</li>
-                    <li><a href="https://www.dr.dk/tv/se/21-soendag/21-soendag-dr1/21-soendag-2018-10-21">DR: 21 Søndag</a> (21. okt. 2018)</li>
-                    <li>&ldquo;<a href="https://fe-ddis.dk/Nyheder/nyhedsarkiv/2018/Pages/Cyberlandsholdet_k%C3%A6mpeoplevelse.aspx"><i>Cyberlandsholdet har været en kæmpe oplevelse [...]</i></a>&rdquo; siger Nicolai Søborg, som er holdkaptajn for Cyberlandsholdet (2018).</li>
-                    <li><a href="https://fe-ddis.dk/Cyberlandsholdet/Pages/Cyberlandsholdet2017.aspx">SysOp på Cyberlandsholdet 2017</a></li>
-                </ul>
+            <div class="exp">
+                <div class="exp-summary">
+                    <ul>
+                        <li><a href="https://www.infosecurity.dk/seminar/S207">Paneldebat: Hvordan tiltrækker vi it-studerende til it-sikkerhedsfaget?</a></li>
+                        <li>Key note presentation at <a href="https://web.archive.org/web/20190410173951/https://www.conferencemanager.dk/smartcitycybersecurityhack/programme.html">Smart City & Cyber Security Hack 2019</a></li>
+                        <li><a href="https://www.dr.dk/radio/p1/orientering/orientering-2018-TODO">P1: Orientering</a> (2018)</li>
+                        <li><a href="https://www.dr.dk/tv/se/21-soendag/21-soendag-dr1/21-soendag-2018-10-21">DR: 21 Søndag</a> (21. okt. 2018)</li>
+                        <li>&ldquo;<a href="https://fe-ddis.dk/Nyheder/nyhedsarkiv/2018/Pages/Cyberlandsholdet_k%C3%A6mpeoplevelse.aspx"><i>Cyberlandsholdet har været en kæmpe oplevelse [...]</i></a>&rdquo; siger Nicolai Søborg, som er holdkaptajn for Cyberlandsholdet (2018).</li>
+                        <li><a href="https://fe-ddis.dk/Cyberlandsholdet/Pages/Cyberlandsholdet2017.aspx">Cyberlandsholdet 2017</a> (fe-ddis.dk/Cyberlandsholdet/Pages/Cyberlandsholdet2017.aspx)</li>
+                    </ul>
+                </div>
             </div>
 
             <h3><span class="fab fa-font-awesome-flag"></span> Capture-The-Flag (CTF)</h3>
-            <div class="exp-summary">
-                In my free time I like to play CTF's.  I usually don't do writeups, but once in a while a writeup will be added to my <a href="https://github.com/NicolaiSoeborg/ctf-writeups">ctf-writeups</a> repo.
-                <br />
-                Furthermore my <a href="https://ctftime.org/user/32131">CTFtime profile</a> is pretty up to date.
+            <div class="exp">
+                <div class="exp-summary">
+                    In my free time I like to play CTF's.  I usually don't do writeups, but once in a while a writeup will be added to my <a href="https://github.com/NicolaiSoeborg/ctf-writeups">ctf-writeups</a> repo (github.com/NicolaiSoeborg/ctf-writeups).
+                    I've been the primary factor to startup (or <i>reboot</i>) a CTF team at my university; DTUHax.
+                    <br />
+                    Furthermore my <a href="https://ctftime.org/user/32131">CTFtime profile</a> (ctftime.org/user/32131) is pretty up to date.
+                </div>
             </div>
 
         </div><!-- /.resume -->

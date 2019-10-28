@@ -3,6 +3,7 @@ AddDefaultCharset UTF-8
 Header add Tk "N"
 Header add X-Powered-By "Hamster in a wheel"
 Header add X-XSS-Protection "X-XSS-Protection: 1; mode=block"
+Header add X-Frame-Options "SAMEORIGIN"
 
 ErrorDocument 404 /404.html
 

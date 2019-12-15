@@ -13,3 +13,5 @@ RedirectMatch 403 .git.*
 RedirectMatch 301 ^/(erdet)?bedstforalle(.*) /ErDetBedstForAlle/$1
 
 AddType text/plain .asc
+AddType video/quicktime .mov .qt
+

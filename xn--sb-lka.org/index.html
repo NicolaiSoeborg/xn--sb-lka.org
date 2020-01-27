@@ -67,7 +67,7 @@ const goodCorps = [
 ];
 
 const rand = goodCorps[Math.floor(Math.random() * goodCorps.length)];
-donation.innerHTML = `Consider giving a donating to: <a href="${rand.url}">${rand.title}</a>. Thanks!`;
+donation.innerHTML = `Consider giving a donation to: <a href="${rand.url}">${rand.title}</a>. Thanks!`;
 
 splitter.classList.remove("hidden");
 splitter.parentElement.appendChild(donation);

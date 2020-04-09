@@ -8,7 +8,8 @@ Header add X-Frame-Options "SAMEORIGIN"
 ErrorDocument 404 /404.html
 
 # Block anything git related
-RedirectMatch 403 .git.*
+RewriteRule ^(.*/)?\.git+ - [R=404,L]
+RedirectMatch 404 ^(.*/)?\.git+
 
 RedirectMatch 301 ^/(erdet)?bedstforalle(.*) /ErDetBedstForAlle/$1
 

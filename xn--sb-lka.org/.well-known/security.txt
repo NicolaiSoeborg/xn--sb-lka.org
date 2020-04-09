@@ -1,0 +1,26 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Canonical: https://xn--sb-lka.org/.well-known/security.txt
+
+Contact: mailto:security@xn--sb-lka.org
+
+Encryption: https://søb.org/pub.asc
+
+Expires: Mon, 12 Sep 2022 16:32:21 +0000
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEGnNJWdFvHvwhUoN/wXKInYdda84FAl6PiiIACgkQwXKInYdd
+a86h3xAAlh8i2pF9RBd3l6HXItV9dRNlbTretidWZxiUchiir83H+6LlAo9eHpIh
+srxzRCuPHly9jW/6FtSJp+Q3fplu1+9H3XI63engkcJMy1DmlAkEh9Clx/jWbW3R
+lJfBb95+sVBzcwBl51jEm/HgxvK8FFWS3MLXeXJba7skOZW/biJmI8hNoUs1faYR
+Ct8H4UkKX19yzKm36pf2Hxql5LKYjo1+hE4am6T6F9lCG1ipmbES6eR9Tq6+ALIA
+g0n1HmVWhU2NDaI3tLSBaMAC5TmVvC8M4WjqhYD/ZsGiX6zqyAEnw3rEG79nFg6n
+GfbKAMUZdukHaBuN6S1LwVFByMk0EyBzHqrQhVaI71dLj2u2Er5kau48Q96DToYV
+Ebj71MqWElW+sH7lFs/DlSjKzT2n19opbkYq68a5xyTavBkwv+fgjCegddmBwrP5
+mxwS0V2rppkMK6K6cWRHaDc8CNgH2JS6bKj1E20CgmQ7Fty+5c59vY8h6EV+2ezY
+rNKh/nhY/wi0QTJO/W1enONPHRBoagXQkCAFgSGwyZfLQMlH19qJ2Lz5G1LvgxM7
+u15Ye4ib+rvmSpjTxM62A29qhXSQVDMKDO5+VlT82QZn+vBMIhH80I/vh8JoJAsj
+pDn5ZNG1ZuONzuHAaXxdIuIbeFfARp1dxAoxG9DQNjaJWMQpI/s=
+=n1Yj
+-----END PGP SIGNATURE-----

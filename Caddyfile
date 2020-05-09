@@ -1,0 +1,56 @@
+{
+	email caddy@xn--sb-lka.org
+	experimental_http3
+}
+
+(sec_headers) {
+	tls {
+		on_demand
+	}
+	header -server  # doesnt work?
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy no-referrer-when-downgrade
+		X-Frame-Options DENY
+		Tk N
+		X-Powered-By "Hamster in a wheel"
+	}
+	encode zstd gzip
+}
+
+xn--sb-lka.org {
+	import sec_headers
+	reverse_proxy /_synapse/* localhost:8008 {
+		header_up Host {http.reverse_proxy.upstream.hostport}
+	}
+	file_server /* {
+		root /var/lib/caddy/www/xn--sb-lka.org/
+	}
+}
+
+badger.xn--sb-lka.org {
+	import sec_headers
+	file_server /* {
+		root /var/lib/caddy/www/badger.xn--sb-lka.org/
+	}
+}
+
+mta-sts.xn--sb-lka.org {
+	import sec_headers
+	file_server /* {
+		root /var/lib/caddy/www/mta-sts.xn--sb-lka.org/
+	}
+}
+
+grafana.xn--sb-lka.org {
+	import sec_headers
+
+	basicauth /* {
+		username hashedpasswordhere
+	}
+
+	reverse_proxy localhost:3000 {
+		header_up -Authorization
+	}
+}
+

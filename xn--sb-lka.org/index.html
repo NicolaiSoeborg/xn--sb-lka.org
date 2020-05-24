@@ -3,10 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Personal website of Nicolai Søborg" />
+  <meta name="description" content="Personal website for Nicolai Søborg. Lots of random open-source tools developed for fun and/or used by DTU studystart" />
   <meta name="author" content="Nicolai Søborg" />
-  <title>Index - Søborg</title>
+  <title>Nicolai Søborg</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <!--<link rel="stylesheet" href="https://latex.now.sh/style.css">-->
   <script>
   function changeTheme() {
     if (document.getElementsByTagName('body')[0].style.backgroundColor !== 'black') {
@@ -21,9 +22,13 @@
   </script>
 
 </head>
-<body>
-<div class="container">
-  <h1 style="text-align:center">SØB.ORG</h1>
+<body class="container">
+  <header style="padding-top: 2ch">
+    <img src="logo.png" alt="SØB.ORG" style="max-width: 100px;" align="right" />
+	<p>Welcome to my website. As you can see I'm no designer, but below you can find a list of projects I have been working on. You can find much more on <a href="https://github.com/NicolaiSoeborg?tab=repositories">my github page</a>.
+	TODO: Add some more frontpage content.</p>
+  </header>
+  <main>
   <div class="row">
     <div class="col">
       <h2>DTU studiestart</h2>
@@ -33,8 +38,9 @@
           <a href="https://badger.xn--sb-lka.org/">Badger3</a> <span style="color:red">(new!)</span>
         </li>
         <li class="list-group-item"><a href="https://github.com/SMRaadet/Overlevering/wiki">S/M Wiki</a></li>
-        <li class="list-group-item"><a href="https://xn--sb-lka.org/bedstforalle">Er Det Bedst For Alle ?</a></li>
+        <li class="list-group-item"><a href="https://xn--sb-lka.org/ErDetBedstForAlle">Er Det Bedst For Alle ?</a></li>
         <li class="list-group-item"><a href="https://github.com/NicolaiSoeborg/tour-de-X">Tour-de-X: Find den <sup>(2-OPT)</sup> optimale tour-de-X rute</a></li>
+        <li class="list-group-item"><a href="https://github.com/NicolaiSoeborg/eduroam">(DTU) Eduroam without installer</a></li>
       </ul>
     </div>
     <div class="col">
@@ -43,9 +49,11 @@
         <li class="list-group-item"><a href="/cv/index.html">Curriculum Vitae</a></li>
         <li class="list-group-item"><a href="https://github.com/NicolaiSoeborg">github.com/NicolaiSoeborg</a></li>
         <li class="list-group-item"><a href="https://github.com/NicolaiSoeborg/ELF2deb">ELF<i>2</i>deb</a></li>
+        <li class="list-group-item"><a href="http://so3borgdb6if7zhyano3qo4k46wuqnb2la3336h2lmlxdmgsz5jg6kad.onion/"><strong>so3borg</strong><mark>db</mark>6<mark>if</mark><u>7z</u><small>hyano3qo</small><u>4k4</u><small>6wuqnb2la</small><mark>3336</mark><small>h2lmlx</small><mark>dmg</mark>sz<small>5jg6kad</small>.onion</a></li>
       </ul>
     </div>
   </div><!--/row-->
+  </main>
   <hr id="splitter" class="hidden"/>
   <span style="float: right">
     <a href="https://xn--sb-lka.org/pub.asc">My PGP key</a> / <a href="https://keybase.io/nico_">keybase</a>
@@ -54,7 +62,7 @@
   </span>
 <script>
 const splitter = document.getElementById("splitter"),
-  donation = document.createElement("p");
+      donation = document.createElement("p");
 
 const goodCorps = [
   {title: 'Mozilla', url: 'https://donate.mozilla.org/'},
@@ -66,12 +74,16 @@ const goodCorps = [
   {title: 'Python Software Foundation', url: 'https://www.python.org/psf/donations/'},
 ];
 
-const rand = goodCorps[Math.floor(Math.random() * goodCorps.length)];
-donation.innerHTML = `Consider giving a donation to: <a href="${rand.url}">${rand.title}</a>. Thanks!`;
-
-splitter.classList.remove("hidden");
+donation.setAttribute("id", "donation");
 splitter.parentElement.appendChild(donation);
 
+function switchGoodCorp() {
+    const rand = goodCorps[Math.floor(Math.random() * goodCorps.length)];
+    document.getElementById("donation").innerHTML = `Consider giving a donation to: <a href="${rand.url}">${rand.title}</a>. Thanks!`;
+}
+
+switchGoodCorp();
+setInterval(switchGoodCorp, 5000);
 </script>
   <!-- Gamle events:
   <hr/>
@@ -81,6 +93,5 @@ splitter.parentElement.appendChild(donation);
     <li class="list-group-item"><a href="Mat1-drukspillet.pdf">Mat1-drukspillet.pdf</a></li>
   </ul>
   -->
-</div>
 </body>
 </html>

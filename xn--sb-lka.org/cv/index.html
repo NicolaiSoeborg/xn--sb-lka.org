@@ -72,7 +72,58 @@
                 Interested in cyber security and practical cryptology.<br/>
                 <!--Looking for jobs starting in August 2019.-->
             </div>
-            <br/>
+
+			<br />
+
+			<h3><span class="fa fa-suitcase"></span> Work Experience</h3>
+            <div class="exp">
+                <div class="exp-company">
+                    <span style="font-size: 16px">Nordic API Gateway</span> <a href="https://www.nordicapigateway.com/"><span class="fa fa-external-link"></span></a>
+                </div>
+                <div class="exp-facts">
+                    <span class="fa fa-map-marker"></span> Christianshavn
+                    <br>
+                    <span class="fa fa-calendar"></span> 09/2019 – &infin;
+                </div>
+                <div class="exp-facts">
+                    <span class="fas fa-user-cog"></span> Reverse Engineer
+                    <br>
+                    <span class="fa fa-wrench"></span> Frida, jadx
+                </div>
+                <div class="exp-summary">
+                    TODO: Some text here
+                </div>
+            </div>
+
+			<div class="exp">
+                <div class="exp-company">
+                    <span style="font-size: 16px">Novozymes</span> <a href="https://novozymes.com"><span class="fa fa-external-link"></span></a>
+                </div>
+                <div class="exp-facts">
+                    <span class="fa fa-map-marker"></span> Bagsværd
+                    <br>
+                    <span class="fa fa-calendar"></span> 02/2016 – 08/2019
+                </div>
+                <div class="exp-facts">
+                    <span class="fas fa-user-cog"></span> Student helper (DevOps)
+                    <br>
+                    <span class="fa fa-wrench"></span> Python, Bash, JS, Linux
+                </div>
+                <div class="exp-summary">
+                    I mostly automated checks to monitor that everything was running as expected.
+                    Did a lot of packaging (bio-)tools to <code>.deb</code> packages.
+                    And helped develop an internal tool to search in terabytes of proteins/dna/genomes.
+                    <ul>
+                        <li>Automation using Python3 and bash</li>
+                        <li>RESTful Django web service</li>
+                        <li>Frontend in React (JavaScript)</li>
+                        <li>Distributed big data storage using HBase and Hadoop </li>
+                        <li>Purely Linux (Ubuntu) based ecosystem</li>
+                    </ul>
+                    I've learned a lot of practical debugging/bug-finding on a variation of different live systems.
+                </div>
+            </div>
+
             <h3><span class="fa fa-graduation-cap"></span> Education</h3>
             <div class="exp">
                 <div class="exp-company">
@@ -167,56 +218,8 @@
                     And furthermore I did a special course about &ldquo;Ensuring Properties of Solidity Contracts&rdquo;.
                 </div>
             </div>
-            
+
             <div style="page-break-after: always;"></div>
-            
-            <h3><span class="fa fa-suitcase"></span> Work Experience</h3>
-            <div class="exp">
-                <div class="exp-company">
-                    <span style="font-size: 16px">Nordic API Gateway</span> <a href="https://www.nordicapigateway.com/"><span class="fa fa-external-link"></span></a>
-                </div>
-                <div class="exp-facts">
-                    <span class="fa fa-map-marker"></span> Christianshavn
-                    <br>
-                    <span class="fa fa-calendar"></span> 09/2019 – &infin;
-                </div>
-                <div class="exp-facts">
-                    <span class="fas fa-user-cog"></span> Reverse Engineer
-                    <br>
-                    <span class="fa fa-wrench"></span> Frida, jadx
-                </div>
-                <div class="exp-summary">
-                    TODO: Some text here
-                </div>
-            </div>
-            <div class="exp">
-                <div class="exp-company">
-                    <span style="font-size: 16px">Novozymes</span> <a href="https://novozymes.com"><span class="fa fa-external-link"></span></a>
-                </div>
-                <div class="exp-facts">
-                    <span class="fa fa-map-marker"></span> Bagsværd
-                    <br>
-                    <span class="fa fa-calendar"></span> 02/2016 – 08/2019
-                </div>
-                <div class="exp-facts">
-                    <span class="fas fa-user-cog"></span> Student helper (DevOps)
-                    <br>
-                    <span class="fa fa-wrench"></span> Python, Bash, JS, Linux
-                </div>
-                <div class="exp-summary">
-                    I mostly automated checks to monitor that everything was running as expected.
-                    Did a lot of packaging (bio-)tools to <code>.deb</code> packages.
-                    And helped develop an internal tool to search in terabytes of proteins/dna/genomes.
-                    <ul>
-                        <li>Automation using Python3 and bash</li>
-                        <li>RESTful Django web service</li>
-                        <li>Frontend in React (JavaScript)</li>
-                        <li>Distributed big data storage using HBase and Hadoop </li>
-                        <li>Purely Linux (Ubuntu) based ecosystem</li>
-                    </ul>
-                    I've learned a lot of practical debugging/bug-finding on a variation of different live systems.
-                </div>
-            </div>
 
             <h3><span class="fa fa-wrench"></span> Technologies</h3>
             <div class="exp">
@@ -266,7 +269,7 @@
     <script>
       // is it night (local time)?
       const hours = new Date().getHours();
-      if (hours < 7 || hours > 22) changeTheme();
+      if (hours < 7 || hours > 21) changeTheme('night');
       window.addEventListener("beforeprint", function(event) { changeTheme('light') });
     </script>
 </body>

@@ -9,16 +9,16 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
   <!--<link rel="stylesheet" href="https://latex.now.sh/style.css">-->
   <script>
-  function changeTheme() {
-    if (document.getElementsByTagName('body')[0].style.backgroundColor !== 'black') {
-      document.getElementsByTagName('body')[0].style.cssText = ' background-color: black; ' +
-        '-webkit-filter: invert(100%); -moz-filter: invert(100%); -o-filter: invert(100%); -ms-filter: invert(100%);';
-      document.getElementById("changeThemeBtn").textContent = "light mode";
-    } else {
-      document.getElementsByTagName('body')[0].style.cssText = '';
-      document.getElementById("changeThemeBtn").textContent = "night mode";
+    function changeTheme(forceTheme = undefined) {
+        const invert = '-webkit-filter: invert(100%); -moz-filter: invert(100%); -o-filter: invert(100%); -ms-filter: invert(100%);';
+        if (forceTheme !== 'light' && document.getElementsByTagName('body')[0].style.backgroundColor !== 'black') {
+            document.getElementsByTagName('body')[0].style.cssText = ' background-color: black; ' + invert;
+            document.getElementById("changeThemeBtn").textContent = "light mode";
+        } else {
+            document.getElementsByTagName('body')[0].style.cssText = '';
+            document.getElementById("changeThemeBtn").textContent = "night mode";
+        }
     }
-  }
   </script>
 </head>
 <body class="container">
@@ -87,6 +87,11 @@ function switchGoodCorp() {
 
 switchGoodCorp();
 setInterval(switchGoodCorp, 5000);
+
+// is it night (local time)?
+const hours = new Date().getHours();
+if (hours < 7 || hours > 21) changeTheme('night');
+window.addEventListener("beforeprint", function(event) { changeTheme('light') });
 </script>
   <!-- Gamle events:
   <hr/>

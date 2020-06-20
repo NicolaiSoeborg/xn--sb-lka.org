@@ -5,7 +5,7 @@ Canonical: https://xn--sb-lka.org/.well-known/security.txt
 
 Contact: mailto:security@xn--sb-lka.org
 
-Encryption: https://søb.org/pub.asc
+Encryption: https://xn--sb-lka.org/pub.asc
 
 Expires: Mon, 12 Sep 2022 16:32:21 +0000
 -----BEGIN PGP SIGNATURE-----

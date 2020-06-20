@@ -6,7 +6,7 @@
   <meta name="description" content="Personal website for Nicolai Søborg. Lots of random open-source tools developed for fun and/or used by DTU studystart" />
   <meta name="author" content="Nicolai Søborg" />
   <title>Nicolai Søborg</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
   <!--<link rel="stylesheet" href="https://latex.now.sh/style.css">-->
   <script>
   function changeTheme() {
@@ -20,45 +20,48 @@
     }
   }
   </script>
-
 </head>
 <body class="container">
   <header style="padding-top: 2ch">
-    <img src="logo.png" alt="SØB.ORG" style="max-width: 100px;" align="right" />
-	<p>Welcome to my website. As you can see I'm no designer, but below you can find a list of projects I have been working on. You can find much more on <a href="https://github.com/NicolaiSoeborg?tab=repositories">my github page</a>.
+    <img src="logo.svg" alt="SØB.ORG" style="max-width: 128px;" align="right" />
+	<p>Welcome to my website. As you can see I'm no designer, but below you can find a list of projects I have been working on. You can find much more on <a class="text-decoration-none" href="https://github.com/NicolaiSoeborg">my github page</a>.
 	TODO: Add some more frontpage content.</p>
   </header>
   <main>
   <div class="row">
     <div class="col">
-      <h2>DTU studiestart</h2>
-      <ul class="list-group">
-        <li class="list-group-item">
-          <a href="https://nicolaisoeborg.github.io/badger/">Badger</a> (old), &nbsp;
-          <a href="https://badger.xn--sb-lka.org/">Badger3</a> <span style="color:red">(new!)</span>
-        </li>
-        <li class="list-group-item"><a href="https://github.com/SMRaadet/Overlevering/wiki">S/M Wiki</a></li>
-        <li class="list-group-item"><a href="https://xn--sb-lka.org/ErDetBedstForAlle">Er Det Bedst For Alle ?</a></li>
-        <li class="list-group-item"><a href="https://github.com/NicolaiSoeborg/tour-de-X">Tour-de-X: Find den <sup>(2-OPT)</sup> optimale tour-de-X rute</a></li>
-        <li class="list-group-item"><a href="https://github.com/NicolaiSoeborg/eduroam">(DTU) Eduroam without installer</a></li>
-      </ul>
+      <h2>Personal</h2>
+      <div class="list-group">
+        <a class="list-group-item list-group-item-action link-primary" href="/cv/index.html">Curriculum Vitae</a>
+        <a class="list-group-item list-group-item-action link-primary" href="https://github.com/NicolaiSoeborg">github.com/NicolaiSoeborg</a>
+        <a class="list-group-item list-group-item-action link-primary" href="https://github.com/NicolaiSoeborg/ELF2deb">ELF<i>2</i>deb</a>
+        <a class="list-group-item list-group-item-action link-primary" href="http://so3borgdb6if7zhyano3qo4k46wuqnb2la3336h2lmlxdmgsz5jg6kad.onion/"><strong>so3borg</strong><mark>db</mark>6<mark>if</mark><u>7z</u><small>hyano3qo</small><u>4k4</u><small>6wuqnb2la</small><mark>3336</mark><small>h2lmlx</small><mark>dmg</mark>sz<small>5jg6kad</small>.onion</a>
+      </div>
     </div>
     <div class="col">
-      <h2>Other</h2>
-      <ul class="list-group">
-        <li class="list-group-item"><a href="/cv/index.html">Curriculum Vitae</a></li>
-        <li class="list-group-item"><a href="https://github.com/NicolaiSoeborg">github.com/NicolaiSoeborg</a></li>
-        <li class="list-group-item"><a href="https://github.com/NicolaiSoeborg/ELF2deb">ELF<i>2</i>deb</a></li>
-        <li class="list-group-item"><a href="http://so3borgdb6if7zhyano3qo4k46wuqnb2la3336h2lmlxdmgsz5jg6kad.onion/"><strong>so3borg</strong><mark>db</mark>6<mark>if</mark><u>7z</u><small>hyano3qo</small><u>4k4</u><small>6wuqnb2la</small><mark>3336</mark><small>h2lmlx</small><mark>dmg</mark>sz<small>5jg6kad</small>.onion</a></li>
-      </ul>
+      <h2>DTU studiestart</h2>
+      <div class="list-group">
+        <div class="list-group list-group-horizontal">
+		  <div class="col">
+            <a class="list-group-item list-group-item-action link-primary" href="https://badger.xn--sb-lka.org/">Badger v3.0 <span style="color:red">(new!)</span></a>
+		  </div>
+		  <div class="col">
+            <a class="list-group-item list-group-item-action link-secondary" href="https://nicolaisoeborg.github.io/badger/">Badger (old)</a>
+		  </div>
+        </div>
+        <a class="list-group-item list-group-item-action link-primary" href="https://github.com/SMRaadet/Overlevering/wiki">S/M Wiki</a>
+        <a class="list-group-item list-group-item-action link-primary" href="https://xn--sb-lka.org/ErDetBedstForAlle">Er Det Bedst For Alle ?</a>
+        <a class="list-group-item list-group-item-action link-primary" href="https://github.com/NicolaiSoeborg/tour-de-X">Tour-de-X: Find den <sup>(2-OPT)</sup> optimale tour-de-X rute</a>
+        <a class="list-group-item list-group-item-action link-primary" href="https://github.com/NicolaiSoeborg/eduroam">(DTU) Eduroam without installer</a>
+      </div>
     </div>
   </div><!--/row-->
   </main>
   <hr id="splitter" class="hidden"/>
   <span style="float: right">
-    <a href="https://xn--sb-lka.org/pub.asc">My PGP key</a> / <a href="https://keybase.io/nico_">keybase</a>
+    <a class="text-decoration-none" href="https://xn--sb-lka.org/pub.asc">My PGP key</a> / <a class="text-decoration-none" href="https://keybase.io/nico_">keybase</a>
     <br/>
-    <a id="changeThemeBtn" href="#" onclick="changeTheme()">night mode</a>
+    <a id="changeThemeBtn" href="#" class="text-decoration-none" onclick="changeTheme()">night mode</a>
   </span>
 <script>
 const splitter = document.getElementById("splitter"),
@@ -79,7 +82,7 @@ splitter.parentElement.appendChild(donation);
 
 function switchGoodCorp() {
     const rand = goodCorps[Math.floor(Math.random() * goodCorps.length)];
-    document.getElementById("donation").innerHTML = `Consider giving a donation to: <a href="${rand.url}">${rand.title}</a>. Thanks!`;
+    document.getElementById("donation").innerHTML = `Consider giving a donation to: <a href="${rand.url}" class="text-decoration-none">${rand.title}</a>. Thanks!`;
 }
 
 switchGoodCorp();
@@ -89,8 +92,8 @@ setInterval(switchGoodCorp, 5000);
   <hr/>
   <h3>Best of Mat1 i Auditorie 81</h3>
   <ul class="list-group">
-    <li class="list-group-item"><a href="https://www.facebook.com/events/459509117872655/">Facebook event</a></li>
-    <li class="list-group-item"><a href="Mat1-drukspillet.pdf">Mat1-drukspillet.pdf</a></li>
+    <li class="list-group-item"><a class="list-group-item list-group-item-action" href="https://www.facebook.com/events/459509117872655/">Facebook event</a></li>
+    <li class="list-group-item"><a class="list-group-item list-group-item-action" href="Mat1-drukspillet.pdf">Mat1-drukspillet.pdf</a></li>
   </ul>
   -->
 </body>

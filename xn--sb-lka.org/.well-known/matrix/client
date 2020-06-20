@@ -1,5 +1,5 @@
 {
     "m.homeserver": {
-	    "base_url": "xn--sb-lka.org"
+        "base_url": "https://xn--sb-lka.org/"
     }
 }

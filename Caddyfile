@@ -7,8 +7,8 @@
 	tls {
 		on_demand
 	}
-	header -server  # doesnt work?
 	header {
+		-Server
 		X-Content-Type-Options nosniff
 		X-Frame-Options DENY
 		X-Powered-By "Hamster in a wheel"
@@ -16,12 +16,16 @@
 		Tk N
 	}
 	encode zstd gzip
+	log {
+		output file /var/log/caddy/access.log
+	}
 }
 
 xn--sb-lka.org {
 	import sec_headers
 	reverse_proxy /_synapse/* localhost:8008
 	reverse_proxy /_matrix/* localhost:18448 {
+		header_down Access-Control-Allow-Origin https://riot.im
 		#header_up Host {http.reverse_proxy.upstream.hostport}
 	}
 	file_server /* {

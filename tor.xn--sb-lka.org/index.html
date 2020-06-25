@@ -1,15 +1,19 @@
-<?xml version="1.0"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta charset="utf-8" />
 <title>This is a Tor Relay</title>
+<link rel="stylesheet" crossorigin="anonymous" href="https://latex.now.sh/style.css" />
 </head>
-<body>
+<body style="max-width: 128ch;">
 
-<p style="text-align:center; font-size:xx-large; font-weight:bold">This is a
-Tor relay</p>
+<h1>This is a Tor relay</h1>
+<p class="author">Nicolai Søborg <br> February 29, 2019</p>
+
+<!--<div class="abstract">
+  <h2>Abstract</h2>
+  <p>...</p>
+</div>-->
 
 <p>
 Most likely you are accessing this website because you had some issue with
@@ -20,9 +24,9 @@ privacy</a> to people who need it most: average computer users. This
 router IP should be generating almost no other traffic, unless it has
 been compromised.</p>
 
-<p style="text-align:center">
+<figure>
 <a href="https://www.torproject.org/about/overview">
-<img src="data:image/png;base64,
+<img style="margin-left: auto; margin-right: auto;" src="data:image/png;base64,
 iVBORw0KGgoAAAANSUhEUgAAAQQAAACQCAMAAADZVuXZAAAABGdBTUEAANbY1E9Y
 MgAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAGAUExURej4
 6Zycm+Hh4XZ2duTk5LS0tfP79OLc3P/r/6iopv///2ZmZgMDAw8PD/b29v39/cTE
@@ -193,7 +197,8 @@ M7ft2l8GC9ZE0xN0d+soywOvExdLvb3R8QSXDUKlma/2vp+bel0gtBPTAsFtkgmu
 4wnWuUHYReyh4b9t4ZecbhPsNuw25GkCgIhZrE24Dl4uWrfgtNvXJ1hV1Fttggtr
 MTvaAgGrryVC6u0NtrtZ/095QntfS68LhHZiWsq3OM7NibdYm7CCbQIDYcJxNU64
 GixdgXAFwhUIny3/L8AAEAy9MIp/F7YAAAAASUVORK5CYII="
-alt="How Tor works" style="border-style:none"/></a></p>
+alt="How Tor works" style="border-style:none"/></a>
+<figure>
 
 <p>
 Tor sees use by <a href="https://www.torproject.org/about/torusers">many
@@ -256,12 +261,10 @@ response</a> for more information on this matter.</p>
 
 <p>
 That being said, if you still have a complaint about the router,  you may
-email the <a href="mailto:FIXME_YOUR_EMAIL_ADDRESS">maintainer</a>. If
-complaints are related to a particular service that is being abused, I will
-consider removing that service from my exit policy, which would prevent my
-router from allowing that traffic to exit through it. I can only do this on an
-IP+destination port basis, however. Common P2P ports are
-already blocked.</p>
+contact the <a href="https://metrics.torproject.org/rs.html#details/6CDE3363F9F9AD5A6EA484DEFB58217CC9685E31">maintainer</a>.
+If complaints are related to a particular service that is being abused, I will
+consider doing nothing while eating a banana, which would not prevent my router
+from allowing that traffic to go through it.</p>
 
 <p>
 You also have the option of blocking this IP address and others on
@@ -275,8 +278,14 @@ be considerate
 when using these options. It would be unfortunate to deny all Tor users access
 to your site indefinitely simply because of a few bad apples.</p>
 
-<p>This relay might be running in the cloud (DigitalOcean) or the forrest of
-Funen, as seen below.</p>
-<img src="server.jpg" />
+<p>
+This relay may be running in the cloud (DigitalOcean) or from a folding chair in
+the forrest of Funen (pictured below).</p>
+
+<br/>
+
+<figure>
+  <img alt="Tor relay running in forrest" src="server.jpg" />
+</figure>
 </body>
 </html>

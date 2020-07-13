@@ -1,6 +1,15 @@
 {
 	email caddy@xn--sb-lka.org
 	experimental_http3
+	order prometheus first
+}
+
+# xcaddy build v2.1.1 \
+#   --with github.com/abiosoft/caddy-exec \
+#   --with github.com/hairyhenderson/caddyprom
+
+127.0.0.1:80 {
+	prometheus
 }
 
 (sec_headers) {
@@ -21,6 +30,18 @@
 	}
 }
 
+# TODO: How to make sure we dont leak?
+so3borgdb6if7zhyano3qo4k46wuqnb2la3336h2lmlxdmgsz5jg6kad.onion:80 {
+	#remote_ip 127.0.0.1
+	file_server /* {
+		root /var/lib/caddy/www/xn--sb-lka.org/
+	}
+}
+
+www.xn--sb-lka.org {
+	redir https://xn--sb-lka.org{uri}
+}
+
 xn--sb-lka.org {
 	import sec_headers
 	reverse_proxy /_synapse/* localhost:8008
@@ -28,6 +49,12 @@ xn--sb-lka.org {
 		header_down Access-Control-Allow-Origin https://riot.im
 		#header_up Host {http.reverse_proxy.upstream.hostport}
 	}
+	file_server /smittestop/* {
+		root /var/lib/caddy/www/xn--sb-lka.org/
+		browse #/var/lib/caddy/www/xn--sb-lka.org/smittestop/browse/browse.tpl
+	}
+	templates /smittestop/
+	templates /smittestop/index.html
 	file_server /* {
 		root /var/lib/caddy/www/xn--sb-lka.org/
 	}
@@ -58,7 +85,8 @@ grafana.xn--sb-lka.org {
 	import sec_headers
 
 	basicauth /* {
-		bob base64encodedpasswordhere
+		# systemctl edit caddy
+		{$CADDY_USERNAME} {$CADDY_PASSWORD}
 	}
 
 	reverse_proxy localhost:3000 {

@@ -4,13 +4,9 @@
 	order prometheus first
 }
 
-# xcaddy build v2.1.1 \
+# xcaddy build \
 #   --with github.com/abiosoft/caddy-exec \
 #   --with github.com/hairyhenderson/caddyprom
-
-127.0.0.1:80 {
-	prometheus
-}
 
 (sec_headers) {
 	tls {
@@ -18,6 +14,8 @@
 	}
 	header {
 		-Server
+		Expect-CT report-uri="https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110"
+		Content-Security-Policy-Report-Only "default-src 'self'; connect-src 'none'; object-src 'none'; script-src 'unsafe-inline' 'self' cdn.bokeh.org cdnjs.cloudflare.com; img-src 'self' data:; style-src 'unsafe-inline' 'self' use.fontawesome.com fonts.googleapis.com *.bootstrapcdn.com cdnjs.cloudflare.com latex.now.sh; font-src use.fontawesome.com fonts.googleapis.com fonts.gstatic.com latex.now.sh; report-uri https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110"
 		X-Content-Type-Options nosniff
 		X-Frame-Options DENY
 		X-Powered-By "Hamster in a wheel"
@@ -44,9 +42,10 @@ www.xn--sb-lka.org {
 
 xn--sb-lka.org {
 	import sec_headers
+	prometheus
 	reverse_proxy /_synapse/* localhost:8008
 	reverse_proxy /_matrix/* localhost:18448 {
-		header_down Access-Control-Allow-Origin https://riot.im
+		header_down Access-Control-Allow-Origin https://riot.im https://app.element.io/
 		#header_up Host {http.reverse_proxy.upstream.hostport}
 	}
 	file_server /smittestop/* {

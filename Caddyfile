@@ -44,10 +44,10 @@ www.xn--sb-lka.org {
 xn--sb-lka.org {
 	import sec_headers
 	prometheus
-	header /.well-known/matrix/* Access-Control-Allow-Origin "https://app.element.io/ https://develop.element.io/"
+	header /.well-known/matrix/* Access-Control-Allow-Origin "*"
 	reverse_proxy /_synapse/* localhost:8008
 	reverse_proxy /_matrix/* localhost:18448 {
-		header_down Access-Control-Allow-Origin "https://app.element.io/ https://develop.element.io/"
+		header_down Access-Control-Allow-Origin "https://develop.element.io"  # Only 1 domain allowed :/
 		#header_up Host {http.reverse_proxy.upstream.hostport}
 	}
 	file_server /smittestop/* {

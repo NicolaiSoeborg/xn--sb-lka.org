@@ -29,6 +29,10 @@
 	}
 }
 
+# so3borgdb6if7zhyano3qo4k46wuqnb2la3336h2lmlxdmgsz5jg6kad.onion:80/test {
+# 	redir http://127.0.0.1:1337/
+# }
+
 # TODO: How to make sure we dont leak?
 so3borgdb6if7zhyano3qo4k46wuqnb2la3336h2lmlxdmgsz5jg6kad.onion:80 {
 	#remote_ip 127.0.0.1

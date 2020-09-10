@@ -29,12 +29,8 @@
 	}
 }
 
-# so3borgdb6if7zhyano3qo4k46wuqnb2la3336h2lmlxdmgsz5jg6kad.onion:80/test {
-# 	redir http://127.0.0.1:1337/
-# }
-
-# TODO: How to make sure we dont leak?
 so3borgdb6if7zhyano3qo4k46wuqnb2la3336h2lmlxdmgsz5jg6kad.onion:80 {
+	# TODO: How to make sure we dont leak?
 	#remote_ip 127.0.0.1
 	file_server /* {
 		root /var/lib/caddy/www/xn--sb-lka.org/
@@ -43,6 +39,12 @@ so3borgdb6if7zhyano3qo4k46wuqnb2la3336h2lmlxdmgsz5jg6kad.onion:80 {
 
 www.xn--sb-lka.org {
 	redir https://xn--sb-lka.org{uri}
+}
+
+xn--sb-lka.org/ip {
+	header Content-Type text/plain
+	templates
+	respond /ip "{{.RemoteIP}}"
 }
 
 xn--sb-lka.org {

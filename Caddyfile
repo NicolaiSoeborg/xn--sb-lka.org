@@ -1,11 +1,9 @@
 {
 	email caddy@xn--sb-lka.org
 	experimental_http3
-	order prometheus first
 }
 
 # xcaddy build \
-#   --with github.com/abiosoft/caddy-exec \
 #   --with github.com/hairyhenderson/caddyprom
 
 (sec_headers) {
@@ -16,7 +14,7 @@
 		-Server
 		Expect-CT report-uri="https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110"
 		Content-Security-Policy-Report-Only "default-src 'self'; connect-src 'none'; object-src 'none'; script-src 'unsafe-inline' 'self' cdn.bokeh.org cdnjs.cloudflare.com; img-src 'self' data:; style-src 'unsafe-inline' 'self' use.fontawesome.com fonts.googleapis.com *.bootstrapcdn.com cdnjs.cloudflare.com latex.now.sh; font-src use.fontawesome.com fonts.googleapis.com fonts.gstatic.com latex.now.sh; report-uri https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110"
-		Strict-Transport-Security max-age=543210;
+		Strict-Transport-Security "max-age=31537331; preload"  # includeSubDomains
 		X-Content-Type-Options nosniff
 		X-Frame-Options DENY
 		X-Powered-By "Hamster in a wheel"
@@ -38,21 +36,22 @@ so3borgdb6if7zhyano3qo4k46wuqnb2la3336h2lmlxdmgsz5jg6kad.onion:80 {
 }
 
 www.xn--sb-lka.org {
-	redir https://xn--sb-lka.org{uri}
+	redir https://xn--sb-lka.org{uri} permanent
 }
 
-xn--sb-lka.org/ip {
+ip.xn--sb-lka.org, ipv4.xn--sb-lka.org, ipv6.xn--sb-lka.org {
 	header Content-Type text/plain
 	templates
-	respond /ip "{{.RemoteIP}}"
+	respond / "{{.RemoteIP}}"
 }
 
 xn--sb-lka.org {
 	import sec_headers
-	prometheus
 	header /.well-known/matrix/* Access-Control-Allow-Origin "*"
 	reverse_proxy /_synapse/* localhost:8008
+	#@wat header_regexp allowedOrigin Origin https?://((app|develop)\.element.io)|localhost)(:[0-9]+)?)$
 	reverse_proxy /_matrix/* localhost:18448 {
+		#header_down Access-Control-Allow-Origin {http.regexp.allowedOrigin.0}
 		header_down Access-Control-Allow-Origin "https://develop.element.io"  # Only 1 domain allowed :/
 		#header_up Host {http.reverse_proxy.upstream.hostport}
 	}
@@ -98,15 +97,15 @@ tor.xn--sb-lka.org {
 	}
 }
 
-grafana.xn--sb-lka.org {
-	import sec_headers
-
-	basicauth /* {
-		# systemctl edit caddy
-		{$CADDY_USERNAME} {$CADDY_PASSWORD}
-	}
-
-	reverse_proxy localhost:3000 {
-		header_up -Authorization
-	}
-}
+#grafana.xn--sb-lka.org {
+#	import sec_headers
+#
+#	basicauth /* {
+#		# systemctl edit caddy
+#		{$CADDY_USERNAME} {$CADDY_PASSWORD}
+#	}
+#
+#	reverse_proxy localhost:3000 {
+#		header_up -Authorization
+#	}
+#}

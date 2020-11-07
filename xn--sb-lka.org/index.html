@@ -5,9 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Personal website for Nicolai Søborg. Lots of random open-source tools developed for fun and/or used by DTU studystart. Also home of various security tools." />
   <meta name="author" content="Nicolai Søborg" />
-  <title>Nicolai Søborg</title>
+  <title>Nicolai Søborg's Homepage</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-  <!--<link rel="stylesheet" href="https://latex.now.sh/style.css">-->
   <script>
     function changeTheme(forceTheme = undefined) {
         const invert = '-webkit-filter: invert(100%); -moz-filter: invert(100%); -o-filter: invert(100%); -ms-filter: invert(100%);';
@@ -84,7 +83,7 @@ const splitter = document.getElementById("splitter"),
       donation = document.createElement("p");
 
 const goodCorps = [
-  {title: 'Mozilla', url: 'https://donate.mozilla.org/'},
+  //{title: 'Mozilla', url: 'https://donate.mozilla.org/'},
   {title: 'Let\'s Encrypt', url: 'https://letsencrypt.org/donate/'},
   {title: 'The Tor Project', url: 'https://donate.torproject.org/'},
   {title: 'Python Software Foundation', url: 'https://www.python.org/psf/donations/'},
@@ -107,7 +106,6 @@ if (hours < 7 || hours > 21) changeTheme('night');
 window.addEventListener("beforeprint", function(event) { changeTheme('light') });
 </script>
   <!-- Gamle events:
-  <hr/>
   <h3>Best of Mat1 i Auditorie 81</h3>
   <ul class="list-group">
     <li class="list-group-item"><a class="list-group-item list-group-item-action" href="https://www.facebook.com/events/459509117872655/">Facebook event</a></li>

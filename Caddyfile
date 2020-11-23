@@ -12,9 +12,10 @@
 	}
 	header {
 		-Server
-		Expect-CT report-uri="https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110"
+		Expect-CT report-uri="https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110",enforce,max-age=86400
 		Content-Security-Policy-Report-Only "default-src 'self'; connect-src 'none'; object-src 'none'; script-src 'unsafe-inline' 'self' cdn.bokeh.org cdnjs.cloudflare.com; img-src 'self' data:; style-src 'unsafe-inline' 'self' use.fontawesome.com fonts.googleapis.com *.bootstrapcdn.com cdnjs.cloudflare.com latex.now.sh; font-src use.fontawesome.com fonts.googleapis.com fonts.gstatic.com latex.now.sh; report-uri https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110"
 		Strict-Transport-Security "max-age=31537331; preload"  # includeSubDomains
+		X-XSS-Protection 0
 		X-Content-Type-Options nosniff
 		X-Frame-Options DENY
 		X-Powered-By "Hamster in a wheel"
@@ -35,6 +36,11 @@ so3borgdb6if7zhyano3qo4k46wuqnb2la3336h2lmlxdmgsz5jg6kad.onion:80 {
 	}
 }
 
+#157.230.112.120:80/* {
+#	header Content-Type application/json
+#	respond /* {"message":"test"}
+#}
+
 www.xn--sb-lka.org {
 	redir https://xn--sb-lka.org{uri} permanent
 }
@@ -50,9 +56,10 @@ xn--sb-lka.org {
 	header /.well-known/matrix/* Access-Control-Allow-Origin "*"
 	reverse_proxy /_synapse/* localhost:8008
 	#@wat header_regexp allowedOrigin Origin https?://((app|develop)\.element.io)|localhost)(:[0-9]+)?)$
-	reverse_proxy /_matrix/* localhost:18448 {
+	reverse_proxy /_matrix/* localhost:8008 {
 		#header_down Access-Control-Allow-Origin {http.regexp.allowedOrigin.0}
-		header_down Access-Control-Allow-Origin "https://develop.element.io"  # Only 1 domain allowed :/
+		#header_down Access-Control-Allow-Origin "https://develop.element.io"  # Only 1 domain allowed :/
+		header_down Access-Control-Allow-Origin "*"  # Only 1 domain allowed :/
 		#header_up Host {http.reverse_proxy.upstream.hostport}
 	}
 	file_server /smittestop/* {
@@ -67,9 +74,11 @@ xn--sb-lka.org {
 }
 
 sm.xn--sb-lka.org {
-	import sec_headers
+	#import sec_headers
+	header Access-Control-Allow-Origin "*"
 	file_server /* {
-		root /var/lib/caddy/www/sm.xn--sb-lka.org/
+		#root /var/lib/caddy/www/sm.xn--sb-lka.org/
+		root /var/lib/caddy/www/xn--sb-lka.org/
 	}
 }
 
@@ -80,6 +89,13 @@ badger.xn--sb-lka.org {
 	}
 	file_server /* {
 		root /var/lib/caddy/www/badger.xn--sb-lka.org/
+	}
+}
+
+bedstforalle.xn--sb-lka.org, ErDetBedstForAlle.xn--sb-lka.org {
+	# import sec_headers
+	file_server /* {
+		root /var/lib/caddy/www/bedstforalle.xn--sb-lka.org/
 	}
 }
 

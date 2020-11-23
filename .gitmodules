@@ -1,5 +1,5 @@
 [submodule "ErDetBedstForAlle"]
-	path = xn--sb-lka.org/ErDetBedstForAlle
+	path = bedstforalle.xn--sb-lka.org/
 	url = git@github.com:NicolaiSoeborg/ErDetBedstForAlle.git
 [submodule "Badger"]
 	path = badger

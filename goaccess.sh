@@ -12,4 +12,4 @@ goaccess <(cat /var/log/caddy/access.log | jq --raw-output '
       .request.headers."User-Agent"[0],
       .duration
     ] | @csv') --log-format='"%h - - [%d:%t %^] ""%m %r %H"" %s %b","%R","%u",%T' --time-format='%H:%M:%S' --date-format='%d/%b/%Y'
-# -o report.html
+# --real-time-html -o report.html

@@ -1,0 +1,19 @@
+{
+  "keys": [
+    {
+      "kty": "OKP",
+      "crv": "Ed25519",
+      "x": "4y8reJKLYmrcyVp7wfxkBx0dndsCdgDOyOm962SjCfQ",
+      "use": "sig",
+      "kid": "mainDidKey"
+    },
+    {
+      "kty": "RSA",
+      "e": "AQAB",
+      "n": "xtuOhTJha9zk80s3EsCv_X_mWoa5_9wbi6HOKaFXj7Ke_aLEMeDJbTY8zV2Z5t0cMR3i6sgguz2mc__jI31LtCqSOP_0YyFKiqBeVYCcuHbPEMwOL-h4Ypq26MQOY9GNwgMXNagSvAYVYrr6IbUIx7AYQjtzyNRB4adZg_Zku8RYvf32J5KO1Pj4N_1cxULP3OaVc4y5KlR0fmTZQpgcwcPDWUSF2AUUTv3Uvmuyh4FJmZXSDWCmuENPy4rx8niU_TV9tIN4-65Q6vOSKWd7JalntrmxU2yzSC16T_BVffu9HMvJnDzwIi17Vcz54SOoW0-jxqfVU31G56H-qoYV4Q",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "fallbackKey"
+    }
+  ]
+}

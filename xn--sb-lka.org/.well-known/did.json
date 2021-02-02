@@ -1,0 +1,29 @@
+{
+  "@context": "https://www.w3.org/ns/did/v1",
+  "id": "did:web:xn--sb-lka.org",
+  "controller": "did:web:xn--sb-lka.org#Nicolai",
+  "verificationMethod": [
+    {
+      "id": "did:web:xn--sb-lka.org#mainDidKey",
+      "type": "JsonWebKey2020",
+      "controller": "did:web:xn--sb-lka.org#Nicolai",
+      "publicKeyJwk": {
+        "crv": "Ed25519",
+        "x": "4y8reJKLYmrcyVp7wfxkBx0dndsCdgDOyOm962SjCfQ",
+        "kty": "OKP",
+        "kid": "mainDidKey"
+      }
+    }
+  ],
+  "authentication": [
+    "did:web:xn--sb-lka.org#mainDidKey"
+  ],
+  "service": [
+    {
+      "@context": "https://www.w3.org/2018/credentials/v1",
+      "id": "did:web:xn--sb-lka.org#vc-srv",
+      "type": "VerifiableCredential",
+      "issuer": "https://xn--sb-lka.org/"
+    }
+  ]
+}

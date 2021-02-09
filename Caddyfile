@@ -77,10 +77,17 @@ xn--sb-lka.org {
 
 sm.xn--sb-lka.org {
 	#import sec_headers
-	header Access-Control-Allow-Origin "*"
+	#header Access-Control-Allow-Origin "*"
 	file_server /* {
 		#root /var/lib/caddy/www/sm.xn--sb-lka.org/
 		root /var/lib/caddy/www/xn--sb-lka.org/
+	}
+}
+
+no-csp.xn--sb-lka.org {
+	header Access-Control-Allow-Origin "*"
+	file_server /* {
+		root /var/lib/caddy/www/no-csp.xn--sb-lka.org/
 	}
 }
 

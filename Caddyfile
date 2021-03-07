@@ -13,7 +13,8 @@
 	header {
 		-Server
 		Expect-CT report-uri="https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110",enforce,max-age=86400
-		Content-Security-Policy "default-src 'self'; connect-src 'none'; object-src 'none'; script-src 'unsafe-inline' 'self' cdn.bokeh.org cdnjs.cloudflare.com storage.googleapis.com; img-src 'self' data:; style-src 'unsafe-inline' 'self' use.fontawesome.com fonts.googleapis.com *.bootstrapcdn.com cdnjs.cloudflare.com latex.now.sh; font-src use.fontawesome.com fonts.googleapis.com fonts.gstatic.com latex.now.sh; report-uri https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110"
+		Content-Security-Policy "default-src 'self'; connect-src 'self' o393671.ingest.sentry.io; script-src 'unsafe-inline' 'self' cdn.bokeh.org cdnjs.cloudflare.com storage.googleapis.com; img-src 'self' data:; style-src 'unsafe-inline' 'self' use.fontawesome.com fonts.googleapis.com *.bootstrapcdn.com cdnjs.cloudflare.com latex.now.sh; font-src 'self' use.fontawesome.com fonts.googleapis.com fonts.gstatic.com latex.now.sh; frame-src 'self' www.youtube-nocookie.com; report-uri https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110"
+		Content-Security-Policy-Report-Only "default-src 'self'; connect-src o393671.ingest.sentry.io; script-src 'self' cdn.bokeh.org; img-src 'self' data:; style-src 'unsafe-inline' 'self' use.fontawesome.com fonts.googleapis.com *.bootstrapcdn.com cdnjs.cloudflare.com latex.now.sh; font-src 'self' use.fontawesome.com fonts.googleapis.com fonts.gstatic.com latex.now.sh; frame-src 'self' www.youtube-nocookie.com; report-uri https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110"
 		Strict-Transport-Security "max-age=31537331; includeSubDomains; preload"
 		X-XSS-Protection 0
 		X-Content-Type-Options nosniff
@@ -102,7 +103,6 @@ badger.xn--sb-lka.org {
 }
 
 bedstforalle.xn--sb-lka.org, ErDetBedstForAlle.xn--sb-lka.org {
-	# import sec_headers
 	file_server /* {
 		root /var/lib/caddy/www/bedstforalle.xn--sb-lka.org/
 	}

@@ -28,23 +28,9 @@
         }
         /* TODO: page-break-after: avoid;  */
     </style>
-    <script>
-        function changeTheme(forceTheme = undefined) {
-            const invert = '-webkit-filter: invert(100%); -moz-filter: invert(100%); -o-filter: invert(100%); -ms-filter: invert(100%);';
-            if (forceTheme !== 'light' && document.getElementsByTagName('body')[0].style.backgroundColor !== 'black') {
-                document.getElementsByTagName('body')[0].style.cssText = ' background-color: black; ' + invert;
-                document.getElementById("meImg").style.cssText = invert;
-                document.getElementById("changeThemeBtn").textContent = "light mode";
-            } else {
-                document.getElementsByTagName('body')[0].style.cssText = '';
-                document.getElementById("meImg").style.cssText = '';
-                document.getElementById("changeThemeBtn").textContent = "night mode";
-            }
-        }
-    </script>
 </head>
 <body>
-    <a id="changeThemeBtn" class="no-print" href="#" style="float: right" onclick="changeTheme()">night mode</a>
+    <a id="changeThemeBtn" class="no-print" href="#" style="float: right">night mode</a>
     <div class="container">
         <div class="resume">
             <div class="name"><strong>Nicolai Søborg</strong></div>
@@ -146,7 +132,7 @@
                 </div>
                 <div>
                     The title of my master thesis is &ldquo;Analyzing the security of IoT devices&rdquo; in which I wrote about when <a href="https://cwe.mitre.org/data/">weaknesses</a> turns into <a href="https://cve.mitre.org/">vulnerabilities</a>, using a lot of data from MITRE (CVE, CVSS, CWE &amp; CAPEC).<br/>
-					<!-- The grade for my thesis was 12 and my GPA during the master was 8.7.<br/> -->
+                    <!-- The grade for my thesis was 12 and my GPA during the master was 8.7.<br/> -->
                     I had the following courses at DTU during my master:
                     <ul style="columns: 2; list-style: none; margin-left: 0">
                         <li><i class="fas fa-shield-alt fa-fw"></i> <a href="https://kurser.dtu.dk/course/01426" title="ECTS: 5">Cryptology 2</a></li>
@@ -187,7 +173,7 @@
                 </div>
                 <div>
                     My bachelor was in &ldquo;Software-Based Fault Tolerant Virtualization Layer Using Sector-Disk Codes&rdquo;.<br/>
-					<!-- GPA for bachelor: 7.8.<br/> -->
+                    <!-- GPA for bachelor: 7.8.<br/> -->
                     I had the following courses at DTU during my bachelor:
                     <ul style="columns: 2; list-style: none; margin-left: 0">
                         <li><i class="fas fa-shield-alt fa-fw"></i> <a href="https://kurser.dtu.dk/course/01410" title="ECTS: 5">Cryptology 1</a></li>
@@ -265,19 +251,13 @@
                     I've been the primary factor to startup (or <i>reboot</i>) a CTF team at my university; DTUHax.
                     <br />
                     Furthermore my <a href="https://ctftime.org/user/32131">CTFtime profile</a> (ctftime.org/user/32131) is pretty up to date.
-					<!-- TODO: Postmark (Wildbit) Hall-of-Fame: https://postmarkapp.com/support/article/779-responsible-disclosure-policy -->
+                    <!-- TODO: Postmark (Wildbit) Hall-of-Fame: https://postmarkapp.com/support/article/779-responsible-disclosure-policy -->
                 </div>
             </div>
 
         </div><!-- /.resume -->
         <br/>
     </div><!-- /.container -->
-    <script>
-      // is it night (local time)?
-      const hours = new Date().getHours();
-      if (hours < 7 || hours > 21) changeTheme('night');
-      window.addEventListener("beforeprint", function(event) { changeTheme('light') });
-    </script>
+    <script type="text/javascript" src="/static/js/changetheme.js"></script>
 </body>
-
 </html>

@@ -7,22 +7,10 @@
   <meta name="author" content="Nicolai Søborg" />
   <title>Nicolai Søborg's Homepage</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-  <script>
-    function changeTheme(forceTheme = undefined) {
-        const invert = '-webkit-filter: invert(100%); -moz-filter: invert(100%); -o-filter: invert(100%); -ms-filter: invert(100%);';
-        if (forceTheme !== 'light' && document.getElementsByTagName('body')[0].style.backgroundColor !== 'black') {
-            document.getElementsByTagName('body')[0].style.cssText = ' background-color: black; ' + invert;
-            document.getElementById("changeThemeBtn").textContent = "light mode";
-        } else {
-            document.getElementsByTagName('body')[0].style.cssText = '';
-            document.getElementById("changeThemeBtn").textContent = "night mode";
-        }
-    }
-  </script>
 </head>
 <body class="container">
   <header style="padding-top: 2.5ch">
-    <img src="logo.svg" alt="SØB.ORG" style="max-width: 128px;" align="right" />
+    <img src="static/img/logo.svg" alt="SØB.ORG" style="max-width: 128px;" align="right" />
 	<p>Welcome to my website. As you can see I'm no designer, but below you can find a list of projects I have been working on. You can find much more on <a class="text-decoration-none" href="https://github.com/NicolaiSoeborg">my github page</a>.
   </header>
   <main>
@@ -76,38 +64,10 @@
   <span style="float: right">
     <a class="text-decoration-none" href="https://xn--sb-lka.org/pub.asc">My PGP key</a> / <a class="text-decoration-none" href="https://keybase.io/nico_">keybase</a>
     <br/>
-    <a id="changeThemeBtn" href="#" class="text-decoration-none" onclick="changeTheme()">night mode</a>
+    <a id="changeThemeBtn" href="#" class="text-decoration-none">night mode</a>
   </span>
-<script>
-const splitter = document.getElementById("splitter"),
-      donation = document.createElement("p");
-
-const goodCorps = [
-  // Sad, but I had to let you go: {title: 'Mozilla', url: 'https://donate.mozilla.org/'},
-  {title: 'Signal', url: 'https://signal.org/donate/'},
-  {title: 'Bellingcat', url: 'https://www.bellingcat.com/donate'},
-  {title: 'Let\'s Encrypt', url: 'https://letsencrypt.org/donate/'},
-  {title: 'The Tor Project', url: 'https://donate.torproject.org/'},
-  {title: 'Python Software Foundation', url: 'https://www.python.org/psf/donations/'},
-  {title: 'Nim (lang)', url: 'https://nim-lang.org/donate.html'},
-];
-
-donation.setAttribute("id", "donation");
-splitter.parentElement.appendChild(donation);
-
-function switchGoodCorp() {
-    const rand = goodCorps[Math.floor(Math.random() * goodCorps.length)];
-    document.getElementById("donation").innerHTML = `Consider giving a donation to: <a href="${rand.url}" class="text-decoration-none">${rand.title}</a>. Thanks!`;
-}
-
-switchGoodCorp();
-setInterval(switchGoodCorp, 5000);
-
-// is it night (local time)?
-const hours = new Date().getHours();
-if (hours < 7 || hours > 21) changeTheme('night');
-window.addEventListener("beforeprint", function(event) { changeTheme('light') });
-</script>
+<script type="text/javascript" src="/static/js/donation-spinner.js"></script>
+<script type="text/javascript" src="/static/js/changetheme.js"></script>
   <!-- Gamle events:
   <h3>Best of Mat1 i Auditorie 81</h3>
   <ul class="list-group">

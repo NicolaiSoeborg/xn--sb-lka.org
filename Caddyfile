@@ -1,6 +1,11 @@
 {
+	admin off
 	email caddy@xn--sb-lka.org
-	experimental_http3
+	servers *:443 {
+		protocol {
+			experimental_http3
+		}
+	}
 }
 
 # xcaddy build \
@@ -13,8 +18,8 @@
 	header {
 		-Server
 		Expect-CT report-uri="https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110",enforce,max-age=86400
-		Content-Security-Policy "default-src 'self'; connect-src 'self' o393671.ingest.sentry.io; script-src 'unsafe-inline' 'self' cdn.bokeh.org cdnjs.cloudflare.com storage.googleapis.com; img-src 'self' data:; style-src 'unsafe-inline' 'self' use.fontawesome.com fonts.googleapis.com *.bootstrapcdn.com cdnjs.cloudflare.com latex.now.sh; font-src 'self' use.fontawesome.com fonts.googleapis.com fonts.gstatic.com latex.now.sh; frame-src 'self' www.youtube-nocookie.com; report-uri https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110"
-		Content-Security-Policy-Report-Only "default-src 'self'; connect-src o393671.ingest.sentry.io; script-src 'self' cdn.bokeh.org; img-src 'self' data:; style-src 'unsafe-inline' 'self' use.fontawesome.com fonts.googleapis.com *.bootstrapcdn.com cdnjs.cloudflare.com latex.now.sh; font-src 'self' use.fontawesome.com fonts.googleapis.com fonts.gstatic.com latex.now.sh; frame-src 'self' www.youtube-nocookie.com; report-uri https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110"
+		Content-Security-Policy "default-src 'self'; connect-src https://*:* o393671.ingest.sentry.io https://matrix.cactus.chat:8448; script-src 'unsafe-inline' 'self' cdn.bokeh.org https://latest.cactus.chat/cactus.js https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/intro.min.js; img-src 'self' data:; style-src 'unsafe-inline' 'self' use.fontawesome.com fonts.googleapis.com *.bootstrapcdn.com https://latest.cactus.chat/style.css cdnjs.cloudflare.com latex.now.sh; font-src 'self' use.fontawesome.com fonts.googleapis.com fonts.gstatic.com latex.now.sh; frame-src 'self' www.youtube-nocookie.com; report-uri https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110"
+		Content-Security-Policy-Report-Only "default-src 'self'; connect-src https://*:* o393671.ingest.sentry.io https://matrix.cactus.chat:8448; script-src 'self' cdn.bokeh.org https://latest.cactus.chat/cactus.js https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/intro.min.js; img-src 'self' data:; style-src 'unsafe-inline' 'self' use.fontawesome.com fonts.googleapis.com *.bootstrapcdn.com https://latest.cactus.chat/style.css cdnjs.cloudflare.com latex.now.sh; font-src 'self' use.fontawesome.com fonts.googleapis.com fonts.gstatic.com latex.now.sh; frame-src 'self' www.youtube-nocookie.com; report-uri https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110"
 		Strict-Transport-Security "max-age=31537331; includeSubDomains; preload"
 		X-XSS-Protection 0
 		X-Content-Type-Options nosniff
@@ -29,17 +34,30 @@
 	}
 }
 
-so3borgdb6if7zhyano3qo4k46wuqnb2la3336h2lmlxdmgsz5jg6kad.onion:80 {
-	# TODO: How to make sure we dont leak?
-	#remote_ip 127.0.0.1
-	file_server /* {
+http://so3borgdb6if7zhyano3qo4k46wuqnb2la3336h2lmlxdmgsz5jg6kad.onion {
+	# Not sure if this is a bug with "caddy adapt" or if caddy actually tries
+	# to request ACME certs for `.onion`, but this seems to disable it
+	#tls internal {
+	#	on_demand
+	#}
+	#bind 127.0.0.1
+	@onlylocal {
+		remote_ip 127.0.0.1
+	}
+	file_server @onlylocal {
 		root /var/lib/caddy/www/xn--sb-lka.org/
 	}
 }
 
+badger.xn--sb-lka.org, mta-sts.xn--sb-lka.org, tor.xn--sb-lka.org {
+	import sec_headers
+	file_server /* {
+		root /var/lib/caddy/www/{host}/
+	}
+}
+
 #157.230.112.120:80/* {
-#	header Content-Type application/json
-#	respond /* {"message":"test"}
+#	respond "Hello World"
 #}
 
 www.xn--sb-lka.org {
@@ -48,9 +66,13 @@ www.xn--sb-lka.org {
 }
 
 ip.xn--sb-lka.org, ipv4.xn--sb-lka.org, ipv6.xn--sb-lka.org {
-	header Content-Type text/plain
 	templates
-	respond / "{{.RemoteIP}}"
+	route /json {
+		header Content-Type application/json
+		respond {"ip":"{{.RemoteIP}}","country":"todo"}
+	}
+	header Content-Type text/plain
+	respond "{{.RemoteIP}}"
 }
 
 xn--sb-lka.org {
@@ -76,15 +98,6 @@ xn--sb-lka.org {
 	}
 }
 
-sm.xn--sb-lka.org {
-	#import sec_headers
-	#header Access-Control-Allow-Origin "*"
-	file_server /* {
-		#root /var/lib/caddy/www/sm.xn--sb-lka.org/
-		root /var/lib/caddy/www/xn--sb-lka.org/
-	}
-}
-
 no-csp.xn--sb-lka.org {
 	header Access-Control-Allow-Origin "*"
 	file_server /* {
@@ -92,33 +105,9 @@ no-csp.xn--sb-lka.org {
 	}
 }
 
-badger.xn--sb-lka.org {
-	import sec_headers
-	header {
-		Clear-Site-Data "*"
-	}
-	file_server /* {
-		root /var/lib/caddy/www/badger.xn--sb-lka.org/
-	}
-}
-
 bedstforalle.xn--sb-lka.org, ErDetBedstForAlle.xn--sb-lka.org {
 	file_server /* {
 		root /var/lib/caddy/www/bedstforalle.xn--sb-lka.org/
-	}
-}
-
-mta-sts.xn--sb-lka.org {
-	import sec_headers
-	file_server /* {
-		root /var/lib/caddy/www/mta-sts.xn--sb-lka.org/
-	}
-}
-
-tor.xn--sb-lka.org {
-	import sec_headers
-	file_server /* {
-		root /var/lib/caddy/www/tor.xn--sb-lka.org/
 	}
 }
 

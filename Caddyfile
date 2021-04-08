@@ -11,7 +11,17 @@
 # xcaddy build \
 #   --with github.com/hairyhenderson/caddyprom
 
+(std_settings) {
+	encode zstd gzip
+	log {
+		output file /var/log/caddy/access.log
+	}
+	# block accidental exposure of git
+	respond /.git/* 403
+}
+
 (sec_headers) {
+	import std_settings
 	tls {
 		on_demand
 	}
@@ -27,10 +37,6 @@
 		X-Powered-By "Hamster in a wheel"
 		Referrer-Policy "no-referrer, strict-origin-when-cross-origin"
 		Tk N
-	}
-	encode zstd gzip
-	log {
-		output file /var/log/caddy/access.log
 	}
 }
 
@@ -49,7 +55,8 @@ http://so3borgdb6if7zhyano3qo4k46wuqnb2la3336h2lmlxdmgsz5jg6kad.onion {
 	}
 }
 
-badger.xn--sb-lka.org, mta-sts.xn--sb-lka.org, tor.xn--sb-lka.org {
+
+badger.xn--sb-lka.org, mta-sts.xn--sb-lka.org, bedstforalle.xn--sb-lka.org, tor.xn--sb-lka.org {
 	import sec_headers
 	file_server /* {
 		root /var/lib/caddy/www/{host}/
@@ -60,12 +67,17 @@ badger.xn--sb-lka.org, mta-sts.xn--sb-lka.org, tor.xn--sb-lka.org {
 #	respond "Hello World"
 #}
 
-www.xn--sb-lka.org {
+www.xn--sb-lka.org, ErDetBedstForAlle.xn--sb-lka.org {
 	import sec_headers
-	redir https://xn--sb-lka.org{uri} permanent
+	map {host}                            {new_host} {
+		ErDetBedstForAlle.xn--sb-lka.org  "bedstforalle.xn--sb-lka.org"
+		default                           "xn--sb-lka.org"
+	}
+	redir https://{new_host}{uri} permanent
 }
 
 ip.xn--sb-lka.org, ipv4.xn--sb-lka.org, ipv6.xn--sb-lka.org {
+	# import std_settings
 	templates
 	route /json {
 		header Content-Type application/json
@@ -86,28 +98,23 @@ xn--sb-lka.org {
 		header_down Access-Control-Allow-Origin "*"  # Only 1 domain allowed :/
 		#header_up Host {http.reverse_proxy.upstream.hostport}
 	}
+	header "Onion-Location" "http://so3borgdb6if7zhyano3qo4k46wuqnb2la3336h2lmlxdmgsz5jg6kad.onion/{uri}"
+	templates /smittestop/index.html
 	file_server /smittestop/* {
 		root /var/lib/caddy/www/xn--sb-lka.org/
 		browse #/var/lib/caddy/www/xn--sb-lka.org/smittestop/browse/browse.tpl
 	}
-	templates /smittestop/
-	templates /smittestop/index.html
-	header "Onion-Location" "http://so3borgdb6if7zhyano3qo4k46wuqnb2la3336h2lmlxdmgsz5jg6kad.onion/{uri}"
 	file_server /* {
 		root /var/lib/caddy/www/xn--sb-lka.org/
 	}
 }
 
 no-csp.xn--sb-lka.org {
+	import std_settings
 	header Access-Control-Allow-Origin "*"
+	header Cache-Control "no-store, max-age=0"
 	file_server /* {
 		root /var/lib/caddy/www/no-csp.xn--sb-lka.org/
-	}
-}
-
-bedstforalle.xn--sb-lka.org, ErDetBedstForAlle.xn--sb-lka.org {
-	file_server /* {
-		root /var/lib/caddy/www/bedstforalle.xn--sb-lka.org/
 	}
 }
 

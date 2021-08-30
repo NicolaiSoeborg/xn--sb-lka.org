@@ -4,7 +4,7 @@ Version: 1.9.7 B
 
 ----------------
 
-# Privilege Defined With Unsafe Actions (CWE-267) 
+# CVE-2020-19641: Privilege Defined With Unsafe Actions (CWE-267) 
 
 A user with "operator" privileges can escalate his privileges to "admin" privileges.
 Note: this doesn't work for a user with "guest" privileges.
@@ -20,7 +20,7 @@ Giving a CVSS score of 6.7
 
 ----------------
 
-# Unrestricted Upload of File with Dangerous Type (CWE-434)
+# CVE-2020-19642: Unrestricted Upload of File with Dangerous Type (CWE-434)
 
 By changing the bytes in "recdata.db" that correspond to ".avi" to ".asp", but keeping the rest of the database structure the same,
 it is possible to put a .asp shell on the SD card (with the same name as a media file) and execute it by visiting "http://192.168.10.1/SD/<filename>.asp".
@@ -32,7 +32,7 @@ Giving a CVSS score of 4.9
 
 ----------------
 
-# Stored Cross-Site Scripting in FTP settings
+# CVE-2020-19643: Stored Cross-Site Scripting in FTP settings
 
 All fields sent from the FTP settings page to "goform/formSetFtpCfg" is vulnerable to a stored XSS.
 
@@ -45,7 +45,7 @@ Giving a CVSS score of 6.2
 
 ----------------
 
-# Cross-Site Request Forgery
+# CVE-2020-19639: Cross-Site Request Forgery
 
 All fields in the WebUI is vulnerable to CSRF.
 
@@ -54,7 +54,7 @@ Giving a CVSS score of 5.4
 
 ----------------
 
-# Reboot DoS
+# CVE-2020-19640: Reboot DoS
 
 The "/media/?action=cmd" endpoint has a hidden reboot command ("&code=255&value=255") that everyone can use to force the camera to reboot
 

@@ -56,7 +56,6 @@ http://so3borgdb6if7zhyano3qo4k46wuqnb2la3336h2lmlxdmgsz5jg6kad.onion {
 	}
 }
 
-
 badger.xn--sb-lka.org, mta-sts.xn--sb-lka.org, bedstforalle.xn--sb-lka.org, tor.xn--sb-lka.org {
 	import sec_headers
 	file_server /* {
@@ -79,6 +78,7 @@ www.xn--sb-lka.org, ErDetBedstForAlle.xn--sb-lka.org {
 
 ip.xn--sb-lka.org, ipv4.xn--sb-lka.org, ipv6.xn--sb-lka.org {
 	# import std_settings
+	header Access-Control-Allow-Origin "*"
 	templates
 	route /json {
 		header Content-Type application/json
@@ -90,15 +90,19 @@ ip.xn--sb-lka.org, ipv4.xn--sb-lka.org, ipv6.xn--sb-lka.org {
 
 xn--sb-lka.org {
 	import sec_headers
+
+	# Matrix + synapse stuff:
 	header /.well-known/matrix/* Access-Control-Allow-Origin "*"
-	reverse_proxy /_synapse/* localhost:8008
-	#@wat header_regexp allowedOrigin Origin https?://((app|develop)\.element.io)|localhost)(:[0-9]+)?)$
+	header /.well-known/matrix/client Content-Type "application/json"
+	# @wat header_regexp allowedOrigin Origin https?://((app|develop)\.element.io)|localhost)(:[0-9]+)?)$
+	reverse_proxy /_synapse/client/* localhost:8008
 	reverse_proxy /_matrix/* localhost:8008 {
-		#header_down Access-Control-Allow-Origin {http.regexp.allowedOrigin.0}
-		#header_down Access-Control-Allow-Origin "https://develop.element.io"  # Only 1 domain allowed :/
+		# header_down Access-Control-Allow-Origin {http.regexp.allowedOrigin.0}
+		# header_down Access-Control-Allow-Origin "https://develop.element.io"  # Only 1 domain allowed :/
 		header_down Access-Control-Allow-Origin "*"  # Only 1 domain allowed :/
-		#header_up Host {http.reverse_proxy.upstream.hostport}
+		# header_up Host {http.reverse_proxy.upstream.hostport}
 	}
+	reverse_proxy /world-flute/save localhost:8331
 	header "Onion-Location" "http://so3borgdb6if7zhyano3qo4k46wuqnb2la3336h2lmlxdmgsz5jg6kad.onion/{uri}"
 	templates /smittestop/
 	templates /smittestop/index.html
@@ -109,6 +113,11 @@ xn--sb-lka.org {
 	file_server /* {
 		root /var/lib/caddy/www/xn--sb-lka.org/
 	}
+}
+
+*.medium.xn--sb-lka.org, medium.xn--sb-lka.org {
+	#import sec_headers
+	reverse_proxy localhost:6666
 }
 
 no-csp.xn--sb-lka.org {

@@ -7,12 +7,17 @@
   <changefreq>monthly</changefreq>
 </url>
 <url>
+  <loc>https://badger.xn--sb-lka.org/</loc>
+  <priority>0.75</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
   <loc>https://xn--sb-lka.org/cv/index.html</loc>
   <priority>0.70</priority>
   <changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>https://søb.org/ErDetBedstForAlle/</loc>
+  <loc>https://BedstForAlle.søb.org/</loc>
   <priority>0.40</priority>
   <changefreq>yearly</changefreq>
 </url>

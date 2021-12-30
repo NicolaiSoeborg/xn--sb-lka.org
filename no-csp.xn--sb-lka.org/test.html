@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Framing test</title>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+	document.getElementById("submitbtn").addEventListener('click', () => {
+		const targetUrl = document.getElementById("url").value;
+		console.log(`Testing ${targetUrl}`);
+		document.getElementById("iframe-clickjack").src = targetUrl;
+		document.getElementById("iframe-cors").src = `data:text/html,<script>fetch("${targetUrl}", { "credentials": "include", "method": "GET", "mode": "cors" }).then(console.log);</scr` + 'ipt>';
+	});
+	const params = new URLSearchParams(document.location.search.substr(1));
+	if (params.has("url")) {
+		document.getElementById("url").value = params.get("url");
+		document.getElementById("submitbtn").click();
+	}
+});
+</script>
+    </head>
+    <body>
+        <p>Enter the URL:</p>
+        <input id="url" type="text" value="https://example.com" />
+        <button id="submitbtn">Test</button>
+
+        <h1>Test for clickjacking</h1>
+        <iframe src="about:blank" id="iframe-clickjack" width="800px" height="600px"></iframe>
+
+        <h1>Test for CORS with null Origin</h1>
+        <iframe id="iframe-cors" sandbox="allow-scripts allow-top-navigation allow-forms" src='data:text/html,<script>fetch("https://example.com", { "credentials": "include", "method": "GET", "mode": "cors" }).then(console.log);</script>'></iframe>
+    </body>
+</html>

@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
+
     <style>
         div.resume { padding-top: 10px }
         .image { float: left; text-align: center; padding-right: 20px }
@@ -21,16 +22,16 @@
         h3 { color: #8a2219 }
         h3 .fa { width: 1.5em; margin-top: 10px }
         .fa { width: 1em; text-align: center }
-        @media (min-width:1200px) { .container { max-width: 970px } }
+        @media (min-width: 1200px) { .container { max-width: 970px } }
         @media print {
             .no-print, .no-print * { display: none !important; }
             a[href]:after { content: none }
         }
         /* TODO: page-break-after: avoid;  */
     </style>
+    <link type="text/css" rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <a id="changeThemeBtn" class="no-print" href="#" style="float: right">night mode</a>
     <div class="container">
         <div class="resume">
             <div class="name"><strong>Nicolai Søborg</strong></div>
@@ -260,6 +261,5 @@
         </div><!-- /.resume -->
         <br/>
     </div><!-- /.container -->
-    <script src="/static/js/changetheme.js"></script>
 </body>
 </html>

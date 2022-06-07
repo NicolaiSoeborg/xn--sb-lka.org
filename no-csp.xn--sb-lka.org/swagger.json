@@ -1,0 +1,9 @@
+{
+    "url": "https://no-csp.xn--sb-lka.org/swagger.yaml",
+    "urls": [
+        {
+            "url": "https://no-csp.xn--sb-lka.org/swagger.yaml",
+            "name": "Foo"
+        }
+    ]
+}

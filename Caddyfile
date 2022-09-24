@@ -1,11 +1,6 @@
 {
 	admin off
 	email caddy@xn--sb-lka.org
-	servers *:443 {
-		protocol {
-			experimental_http3
-		}
-	}
 }
 
 # xcaddy build \
@@ -93,6 +88,7 @@ xn--sb-lka.org {
 	# Matrix + synapse stuff:
 	header /.well-known/matrix/* Access-Control-Allow-Origin "*"
 	header /.well-known/matrix/client Content-Type "application/json"
+	header /.well-known/matrix/server Content-Type "application/json"
 	# @wat header_regexp allowedOrigin Origin https?://((app|develop)\.element.io)|localhost)(:[0-9]+)?)$
 	reverse_proxy /_synapse/client/* localhost:8008
 	reverse_proxy /_matrix/* localhost:8008 {

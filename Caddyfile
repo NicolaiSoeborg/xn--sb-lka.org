@@ -63,9 +63,9 @@ badger.xn--sb-lka.org, mta-sts.xn--sb-lka.org, bedstforalle.xn--sb-lka.org, tor.
 
 www.xn--sb-lka.org, ErDetBedstForAlle.xn--sb-lka.org {
 	import sec_headers
-	map {host}                            {new_host} {
-		ErDetBedstForAlle.xn--sb-lka.org  "bedstforalle.xn--sb-lka.org"
-		default                           "xn--sb-lka.org"
+	map {host} {new_host} {
+		ErDetBedstForAlle.xn--sb-lka.org "bedstforalle.xn--sb-lka.org"
+		default "xn--sb-lka.org"
 	}
 	redir https://{new_host}{uri} permanent
 }
@@ -76,7 +76,7 @@ ip.xn--sb-lka.org, ipv4.xn--sb-lka.org, ipv6.xn--sb-lka.org {
 	templates
 	route /json {
 		header Content-Type application/json
-		respond {"ip":"{{.RemoteIP}}","country":"todo"}
+		respond {"ip":"{.RemoteIP}}","country":"todo"}
 	}
 	header Content-Type text/plain
 	respond "{{.RemoteIP}}"
@@ -94,7 +94,7 @@ xn--sb-lka.org {
 	reverse_proxy /_matrix/* localhost:8008 {
 		# header_down Access-Control-Allow-Origin {http.regexp.allowedOrigin.0}
 		# header_down Access-Control-Allow-Origin "https://develop.element.io"  # Only 1 domain allowed :/
-		header_down Access-Control-Allow-Origin "*"  # Only 1 domain allowed :/
+		header_down Access-Control-Allow-Origin "*" # Only 1 domain allowed :/
 		# header_up Host {http.reverse_proxy.upstream.hostport}
 	}
 	reverse_proxy /world-flute/save localhost:8331

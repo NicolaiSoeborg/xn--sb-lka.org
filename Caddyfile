@@ -82,6 +82,18 @@ ip.xn--sb-lka.org, ipv4.xn--sb-lka.org, ipv6.xn--sb-lka.org {
 	respond "{{.RemoteIP}}"
 }
 
+tls13.xn--sb-lka.org {
+	import std_settings
+	tls {
+		protocols tls1.3
+	}
+	respond "You are connected with {tls_version}. Cipher: {tls_cipher}."
+}
+tls.xn--sb-lka.org {
+	import std_settings
+	respond "You are connected with {tls_version}. Cipher: {tls_cipher}."
+}
+
 xn--sb-lka.org {
 	import sec_headers
 

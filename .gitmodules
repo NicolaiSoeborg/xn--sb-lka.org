@@ -4,3 +4,6 @@
 [submodule "Badger"]
 	path = badger
 	url = git@github.com:NicolaiSoeborg/badger.git
+[submodule "xn--sb-lka.org/ctf-writeups"]
+	path = xn--sb-lka.org/ctf-writeups
+	url = https://github.com/NicolaiSoeborg/ctf-writeups.git

@@ -4,9 +4,6 @@
 	email caddy@xn--sb-lka.org
 }
 
-# xcaddy build \
-#   --with github.com/hairyhenderson/caddyprom
-
 (std_settings) {
 	encode zstd gzip
 	log {
@@ -76,10 +73,16 @@ ip.xn--sb-lka.org, ipv4.xn--sb-lka.org, ipv6.xn--sb-lka.org {
 	templates
 	route /json {
 		header Content-Type application/json
-		respond {"ip":"{.RemoteIP}}","country":"todo"}
+		respond {"ip":"{{.RemoteIP}}","country":"todo"}
 	}
 	header Content-Type text/plain
 	respond "{{.RemoteIP}}"
+}
+
+info.xn--sb-lka.org {
+	header Content-Type text/plain
+	templates
+	respond "You ({{.RemoteIP}}) are connected with {http.request.proto} (ALPN: {http.request.tls.proto}) over {tls_version} (cipher: {tls_cipher})."
 }
 
 (tls_reply) {
@@ -114,10 +117,10 @@ mtls.xn--sb-lka.org {
 	tls {
 		alpn {args.0}
 	}
-	map {args.0}	{proto_name} {
-		http/1.1	HTTP/1.1
-		h2			HTTP/2.0
-		h3			HTTP/3.0
+	map {args.0} {proto_name} {
+		http/1.1 HTTP/1.1
+		h2 HTTP/2.0
+		h3 HTTP/3.0
 	}
 	@correctALPN `{http.request.proto} == {proto_name}`
 	respond @correctALPN "You are connected with {http.request.proto} ({tls_version}, {tls_cipher})."
@@ -135,7 +138,14 @@ http2.xn--sb-lka.org {
 	import http_reply h2
 }
 http3.xn--sb-lka.org {
-	import http_reply h3
+	# import http_reply h3
+	import std_settings
+	tls {
+		alpn h3 h3-29 h3-32 quic
+	}
+	@correctALPN `{http.request.proto} == "HTTP/3"`
+	respond @correctALPN "You are connected with {http.request.proto} ({tls_version}, {tls_cipher})."
+	respond "You are connected with {http.request.proto} instead of HTTP/3 ({tls_version}, {tls_cipher})."
 }
 
 ##### END SERVICES #####
@@ -148,27 +158,43 @@ xn--sb-lka.org {
 	header /.well-known/matrix/client Content-Type "application/json"
 	header /.well-known/matrix/server Content-Type "application/json"
 	# @wat header_regexp allowedOrigin Origin https?://((app|develop)\.element.io)|localhost)(:[0-9]+)?)$
-	reverse_proxy /_synapse/client/* localhost:8008
+	#reverse_proxy /_synapse/client/* localhost:8008
 	reverse_proxy /_matrix/* localhost:8008 {
 		# header_down Access-Control-Allow-Origin {http.regexp.allowedOrigin.0}
 		# header_down Access-Control-Allow-Origin "https://develop.element.io"  # Only 1 domain allowed :/
 		header_down Access-Control-Allow-Origin "*" # Only 1 domain allowed :/
 		# header_up Host {http.reverse_proxy.upstream.hostport}
 	}
-	reverse_proxy /world-flute/save localhost:8331
-	header "Onion-Location" "http://so3borgdb6if7zhyano3qo4k46wuqnb2la3336h2lmlxdmgsz5jg6kad.onion/{uri}"
+	# reverse_proxy /world-flute/save localhost:8331
+	header "Onion-Location" "http://so3borgdb6if7zhyano3qo4k46wuqnb2la3336h2lmlxdmgsz5jg6kad.onion{uri}"
+
+	# WebFinger
+	header /.well-known/webfinger Content-Type "application/json"
+	# OASIS Open
+	redir /.well-known/host-meta https://norrebro.space{uri} 301
+	# Diaspora discovery
+	header /.well-known/nodeinfo Content-Type "application/json; profile=\"http://nodeinfo.diaspora.software/ns/schema/2.0#\""
+
+	# Smittestop
 	templates /smittestop/
 	templates /smittestop/index.html
 	file_server /smittestop/* {
 		root /var/lib/caddy/www/xn--sb-lka.org/
 		browse #/var/lib/caddy/www/xn--sb-lka.org/smittestop/browse/browse.tpl
 	}
-	templates /ctf-writeups/
-	#file_server /ctf-writeups/* {
-	#	root /var/lib/caddy/www/xn--sb-lka.org/ctf-writeups/
-	#	index README.md
-	#	browse
-	#}
+
+	# CTF-Writeups:
+	header /ctf-writeups/*.md {
+		# Sadly this doesn't work in FF: https://bugzilla.mozilla.org/show_bug.cgi?id=1319262
+		Content-Type "text/markdown"
+		Content-Disposition inline
+	}
+	file_server /ctf-writeups/* {
+		root /var/lib/caddy/www/xn--sb-lka.org/
+		#index README.md
+		browse
+	}
+
 	file_server {
 		root /var/lib/caddy/www/xn--sb-lka.org/
 	}

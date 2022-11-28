@@ -1,0 +1,23 @@
+{
+  "subject": "acct:n@norrebro.space",
+  "aliases": [
+    "https://norrebro.space/@n",
+    "https://norrebro.space/users/n"
+  ],
+  "links": [
+     {
+      "rel": "http://webfinger.net/rel/profile-page",
+      "type": "text/html",
+      "href": "https://norrebro.space/@n"
+    },
+    {
+      "rel": "self",
+      "type": "application/activity+json",
+      "href": "https://norrebro.space/users/n"
+    },
+    {
+      "rel": "http://ostatus.org/schema/1.0/subscribe",
+      "template": "https://norrebro.space/authorize_interaction?uri={uri}"
+    }
+  ]
+}

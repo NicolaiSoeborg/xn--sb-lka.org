@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Can you distinguish real and phishing Microsoft domains? Spoiler: probably not" />
+  <meta name="author" content="Nicolai Søborg" />
+  <title>Microsoft Domain Bingo</title>
+  <link rel="stylesheet" crossorigin="anonymous" href="https://fonts.googleapis.com/css?family=Amatic+SC|Architects+Daughter|Black+Ops+One|Clicker+Script|Diplomata+SC|Griffy|Indie+Flower|Kaushan+Script|Lobster|Marck+Script|Monoton|Orbitron|Permanent+Marker|Righteous|Roboto|ZCOOL+KuaiLe"/>
+
+  <!-- Cactus comments -->
+  <link type="text/css" rel="stylesheet" href="https://latest.cactus.chat/style.css">
+
+  <style>
+body {
+  background-color: #81a0fe;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><linearGradient id='gradient'><stop offset='10%' stop-color='%2381a000'/><stop offset='90%' stop-color='%2391a0ff'/> </linearGradient><rect fill='url(%23gradient)' x='0' y='0' width='100%' height='100%'/></svg>");
+}
+#middle {
+  border-left: 6px solid red;
+  margin-left: -3px;
+  position: absolute;
+  left: 50%; top: 1%;
+  height: 98%;
+}
+#wave {
+  top: 1%; left: 50%; position: absolute;
+  height: 98%; width: 49%;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'><path fill='%230099ff' fill-opacity='1' d='M0,192L48,170.7C96,149,192,107,288,117.3C384,128,480,192,576,186.7C672,181,768,107,864,106.7C960,107,1056,181,1152,197.3C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'></path></svg>");
+  animation: 10s infinite alternate shake;
+}
+#pirate:hover {
+  animation: 1s infinite alternate shake;
+}
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-2deg); }
+  20% { transform: translate(-3px, 0px) rotate(2deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(2deg); }
+  50% { transform: translate(-1px, 2px) rotate(-2deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-2deg); }
+  80% { transform: translate(-1px, -1px) rotate(2deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-2deg); }
+}
+#pirate {
+  top: 80%; left: 70%; position: absolute;
+  height: 19%; width: 29%;
+  background-image: url(pirate.png);
+}
+.blowup {
+  transition: 1s;
+  opacity: 0;
+  transform: scale(5) rotate(30deg);
+}
+.target {
+  cursor: crosshair;
+}
+  </style>
+<script>
+// These are owned by Microsoft:
+const boring = ["microsoft.com", "microsoft.ms", "azure.com", "azure.ms", "windows.com", "azuremicrosoft.com", "microsoftazure.com", "microsoftlogin.com", "microsoft-login.com", "microsoft-windows.com", "microsoftwindows.com"];
+// These are actually used during login to Microsoft products(!):
+const madness = ["autologon.microsoftazuread-sso.com","account.activedirectory.windowsazure.com", "login.microsoftonline.com", "onmicrosoft.com", "click.email.microsoftemail.com", "teams.microsoft.com.mcas.ms", "companyname-onmicrosoft-com.access.mcas.ms", "microsoftsupport.com"];
+const random_ms_words = ["microsoft", "azure", "windows", "activedirectory", "ad", "auto", "login", "sso", "websites"];
+
+const fonts = ["Amatic SC", "Architects Daughter", "Black Ops One", "Clicker Script", "Diplomata SC", "Griffy", "Indie Flower", "Kaushan Script", "Lobster", "Marck Script", "Monoton", "Orbitron", "Permanent Marker", "Righteous", "Roboto", "ZCOOL KuaiLe"];
+
+const apex = (domain) => domain.split(".").slice(-2).join(".");
+const rand = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+const randomize = (lst) => Array.from(lst).sort(() => (Math.random() > .5) ? 1 : -1);
+
+function gpt3_taylor_approx() {
+  let universe = randomize(random_ms_words);
+  let res_len = rand(2, 6);
+  let result = "";
+  // Subdomain?
+  for (var i = 0; i < 2, res_len > 1; i++) {
+    if (Math.random() < 0.2) {
+      res_len--;
+      result += `${universe.pop()}.`;
+    }
+  }
+  const combiner = randomize(["", "-"]).pop();
+  res_len = Math.max(2, res_len);
+  result += universe.slice(0, res_len).join(combiner);
+  result += rand(0, 10) < 7 ? ".com" : ".ms";
+  // Did we generate a real domain?
+  if (madness.some(dom => apex(dom) == apex(result)) || boring.some(dom => dom == apex(result)) )
+    return gpt3_taylor_approx();
+  return result;
+}
+
+function fun(typ, chall) {
+  const speed = rand(65, 850);
+  const elm = document.createElement("figure");
+  const img = document.createElement("img");
+  const figcaption = document.createElement("figcaption");
+  img.src = "pirate.png";
+  img.style.transform = "scaleX(-1)";
+  let pos_left = 100;
+  let pos_top = rand(10, 75);
+  let pos_wave = randomize([-1, -1, 0, 1, 1]).pop();  // boring if "0". Has to be -/+ 1 otherwise "% 20" check below might not be true
+  elm.className = "target";
+  elm.style.position = "absolute";
+  elm.style.left = `${pos_left}%`
+  elm.style.top = `${pos_top}%`;
+
+  figcaption.style.fontFamily = randomize(fonts).pop();
+  figcaption.style.fontSize = "20px";
+  figcaption.innerText = `${chall}`;
+  elm.appendChild(img);
+  elm.appendChild(figcaption);
+  document.body.appendChild(elm);
+  const moveId = setInterval(function (){
+    elm.style.left = `${pos_left}%`
+    elm.style.top = `${pos_top}%`;
+    pos_left -= 1; pos_top += pos_wave;
+    if (pos_top % 20 == 0) pos_wave *= -1;
+    if (pos_left < 40) {  // 50% is a bit early
+      if (typ === "real") {
+        if (elm.innerText.indexOf("😇") == -1) {
+          elm.innerHTML = `<h1>😇 ${elm.innerText} 😇</h1>`;
+          setTimeout(() => { clearInterval(moveId); elm.remove(); }, 15000);
+        }
+      }
+      if (typ === "fake") {
+        alert(`Oh noes! "${chall}" not owned by Microsoft and might be phishing 🎣`);
+        elm.classList.add("blowup");
+        clearInterval(moveId);
+      }
+      //elm.classList.add("blowup");
+    }
+  }, speed);
+  elm.onclick = () => {
+    clearInterval(moveId);
+    if (typ === "fake") {
+      elm.remove();  // TODO: blowup effect?
+    }
+    if (typ === "real") {
+      alert(`Oh noes! "${chall}" is actually a real domain used by Microsoft during login :/`);
+      elm.classList.add("blowup");
+    }
+  }
+}
+
+function start() {
+  let dont_hit = randomize(madness);
+  for (var i = 0; i < 10; i++) {
+    let chall, typ;
+    if (rand(0, 100) <= 30) {
+      typ = "real"; chall = dont_hit.pop();
+    } else {
+      typ = "fake"; chall = gpt3_taylor_approx();
+    }
+    setTimeout(fun, i*rand(2500 , 4500), typ, chall);
+    // TODO: trophy in end?
+  }
+};
+</script>
+</head>
+<body class="container">
+  <header style="padding-top: 2.5ch">
+    Shoot all phishing websites before they get to shore,<br/>but watch out for real Microsoft domains!
+  </header>
+  <main>
+    <!-- <map name="map-name">
+      <area shape="map shape" coords="map coordinates" href="area URL" target="URL target" title="area title" alt="alternate text"/>
+    </map>
+    <img loading="lazy" style="border: 0px initial initial;" title="Image Map Demo" usemap="#Map" src="..." alt="Image Map Demo" data-recalc-dims="1" width="600" height="300" border="0">-->
+  <div id="middle"></div>
+  <div id="wave"></div>
+  <div id="pirate" class="target" onclick="this.remove(); start();"></div>
+  </main>
+  <br/>
+  <br/>
+  <br/>
+  <details style="max-width: 49%">
+    <summary><b>Add a public comment using Cactus Comments</b></summary>
+    <script src="https://latest.cactus.chat/cactus.js" crossorigin="anonymous"
+          data-default-homeserver-url="https://matrix.cactus.chat:8448" data-server-name="cactus.chat"
+          data-site-name="søb.org" data-comment-section-id="ms-domain-bingo"></script>
+  </details>
+</body>
+</html>

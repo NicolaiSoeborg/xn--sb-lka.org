@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="...">
+    <title>Password Policies</title>
+	<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"> -->
+    <link href="bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  </head>
+  <body>
+<div class="col-lg-8 mx-auto p-4 py-md-5">
+  <header class="d-flex pb-3 mb-5 border-bottom">
+    <span class="fs-4">
+      <a href="https://xn--sb-lka.org/" class="d-flex text-body-emphasis text-decoration-none">
+        SØB.ORG
+      </a> A review of current Password Policies/Recommendations (2023)
+    </span>
+  </header>
+
+  <main>
+    <h1 class="text-body-emphasis">Preface</h1>
+    <p class="fs-5">Length and complexity requirements beyond those recommended here significantly increase the
+difficulty of memorized secrets and increase user frustration. As a result, users often work
+around these restrictions in a way that is counterproductive. Furthermore, other mitigations such
+as blacklists, secure hashed storage, and rate limiting are more effective at preventing modern
+brute-force attacks. Therefore, no additional complexity requirements should be imposed.</p>
+
+	<p class="fs-5">Let's look into what is actually required in modern security standards/frameworks.</p>
+	<br/>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Standard</th>
+          <th scope="col">Mandatory Password Rotation</th>
+          <th scope="col">Minimum Password Length</th>
+          <th scope="col">Password Charset Restrictions</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr>
+          <th scope="row">NIST SP 800-63B</th>
+          <td class="table-success">No</td>
+          <td class="table-warning">8</td>
+          <td class="table-success">None</td>
+        </tr>
+        <tr>
+          <th scope="row">PCI-DSS v4.0</th>
+          <td class="table-warning">No*</td>
+          <td class="table-success">12</td>
+          <td>?</td>
+        </tr>
+        <tr>
+          <th scope="row">Microsoft</th>
+          <td class="table-success">No</td>
+          <td class="table-success">14</td>
+          <td class="table-success">None</td>
+        </tr>
+        <tr>
+          <th scope="row">(Danish) CFCS</th>
+          <td class="table-success">No</td>
+          <td class="table-success">15</td>
+          <td class="table-success">None</td>
+        </tr>
+        <tr>
+          <th scope="row">Canadian Centre for Cyber Security</th>
+          <td class="table-success">No</td>
+          <td class="table-success">12</td>
+          <td class="table-success">None</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- <div class="mb-5">
+      <a href="/docs/5.3/examples/" class="btn btn-primary btn-lg px-4">Download examples</a>
+    </div> -->
+    <!-- <hr class="col-3 col-md-2 mb-5"> -->
+	<br/>
+	<span></span>
+	<br/>
+
+    <div class="row g-5">
+      <div class="col-md-6">
+        <h2 class="text-body-emphasis">NIST Special Publication 800-63B (2017)</h2>
+        <p>TL;DR - 8 chars minimum length, no charset restrictions but ban dictionary/context-specific words, enforce rate-limits and no password hints.</p>
+        <p>Quotes:</p>
+        <blockquote class="blockquote">Verifiers SHOULD NOT impose other composition rules (e.g., requiring mixtures of different character types or prohibiting consecutively repeated characters) for memorized secrets.</blockquote>
+        <blockquote class="blockquote">Verifiers SHOULD NOT require memorized secrets to be changed arbitrarily (e.g., periodically).</blockquote>
+      </div>
+
+      <div class="col-md-6">
+        <h2 class="text-body-emphasis">Payment Card Industry (PCI) - Data Security Standard (DSS) (2022)</h2>
+        <p>TL;DR - 12 chars minimum length, charset should contain both numeric and alphabetic characters, enforce rate-limits.</p>
+        <p>Quotes:</p>
+        <blockquote class="blockquote">Passwords/passphrases are changed at least once every 90 days, <strong>OR</strong> The security posture of accounts is dynamically analyzed, and real-time access to resources is automatically determined accordingly.</blockquote>
+      </div>
+
+      <div class="col-md-6">
+        <h2 class="text-body-emphasis">Password policy recommendations for Microsoft 365 passwords (2023)</h2>
+        <p>TL;DR - 14 chars minimum length, no charset restrictions but ban dictionary/context-specific words, enforce rate-limits and MFA.</p>
+        <p>Quotes:</p>
+        <blockquote class="blockquote">Password expiration requirements do more harm than good</blockquote>
+        <blockquote class="blockquote">Password complexity requirements reduce key space and cause users to act in predictable ways, doing more harm than good.</blockquote>
+      </div>
+
+      <div class="col-md-6">
+        <h2 class="text-body-emphasis">The Centre for Cyber Security (CFCS) - Passwordsikkerhed (2023)</h2>
+        <p>TL;DR - 15 chars minimum length, no charset restrictions but ban dictionary words, enforce MFA and encourage password-manager usage..</p>
+        <p>Quotes (danish):</p>
+        <blockquote class="blockquote">Undgå unødvendige komplicerede passwordregler - god længde. Lavere kompleksitet</blockquote>
+        <blockquote class="blockquote">Tvunget passwordskift skal benyttes, <strong>hvis</strong> der findes tegn på eller mistanke om kompromittering</blockquote>
+        <blockquote class="blockquote">Hvis der gennemtvinges periodisk ændring af passwordet, sammensætter brugere ofte et nyt, som er næsten identisk med det tidligere</blockquote>
+		<!-- https://www.cfcs.dk/globalassets/cfcs/dokumenter/vejledninger/CFCS-passwordsikkerhed.pdf -->
+      </div>
+
+      <div class="col-md-6">
+        <h2 class="text-body-emphasis">Canadian Centre for Cyber Security - Best practices for passphrases and passwords (2019).</h2>
+		<p><a href="https://cyber.gc.ca/en/guidance/best-practices-passphrases-and-passwords-itsap30032">Link</a></p>
+      </div>
+
+	  <!--
+      <div class="col-md-6">
+        <h2 class="text-body-emphasis">Microsoft (20??)</h2>
+        <p>TL;DR - </p>
+        <p>Quotes:</p>
+        <blockquote class="blockquote"></blockquote>
+      </div>
+	  -->
+
+
+    </div>
+  </main>
+  <footer class="pt-5 my-5 text-body-secondary border-top">
+    Additional references
+    <ul>
+      <li><a href="https://youtu.be/pKP-nv2Oqdg?t=565">Passwords are not going away - Per Thorsheim - NDC Security (2022)</a></li>
+      <li><a href="https://www.ftc.gov/policy/advocacy-research/tech-at-ftc/2016/03/time-rethink-mandatory-password-changes">FTC.gov: Time to rethink mandatory password changes (2016)</a></li>
+    </ul>
+  </footer>
+</div>
+  </body>
+</html>

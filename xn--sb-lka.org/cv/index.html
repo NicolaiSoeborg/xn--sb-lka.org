@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <title>Nicolai Søborg - Curriculum Vitae (CV)</title>
-    <meta name="description" content="Nicolai Søborg's Resumé, Curriculum Vitae.">
+    <meta name="description" content="Nicolai Søborg's Resumé, Curriculum Vitae, C.V.">
+    <meta name="robots" content="noindex">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
+    <link rel="stylesheet" href="bootstrap-5.2.3.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css" integrity="sha384-iw3OoTErCYJJB9mCa8LNS2hbsQ7M3C0EpIsO/H5+EGAkPGc6rk+V8i04oW/K5xq0" crossorigin="anonymous">
 
     <style>
         div.resume { padding-top: 10px }
@@ -19,6 +20,12 @@
         .exp-company { font-size: 20px; font-weight: 700; vertical-align: top; width: 25%; display: inline-block }
         .exp-facts { color: #888; font-size: 12px; display: inline-block; width: 35% }
         .exp-summary { padding-top: 8px; display: block }
+
+        /**/
+        details > summary { list-style: none; }
+        details summary::before { content:""; }
+        details[open] summary::before { content:"📚"; }
+
         h3 { color: #8a2219 }
         h3 .fa { width: 1.5em; margin-top: 10px }
         .fa { width: 1em; text-align: center }
@@ -36,7 +43,7 @@
         <div class="resume">
             <div class="name"><strong>Nicolai Søborg</strong></div>
             <div class="image">
-                <img id="meImg" src="me.png" width="148" height="148" class="img-circle" alt="A good looking picture of me." />
+                <img id="meImg" src="me.png" width="148" height="148" class="img-circle" alt="A good looking picture." />
             </div>
             <div class="biography">
                 <span class="fas fa-user-tie fa-fw icon"></span> M.Sc. in Information Technology
@@ -64,35 +71,37 @@
             <h3 id="work"><span class="fa fa-suitcase"></span> Work Experience</h3>
             <div class="exp">
                 <div class="exp-company">
-                    <span style="font-size: 16px">Mastercard</span> <a href="https://www.mastercard.com/"><span class="fa fa-external-link"></span></a>
+                    <span style="font-size: 16px">Mastercard</span> <a href="https://www.mastercard.com/"><span class="fa fa-arrow-up-right-from-square fa-2xs"></span></a>
                 </div>
                 <div class="exp-facts">
-                    <span class="fa fa-map-marker"></span> Amager
+                    <span class="fa fa-map-marker"></span> Amager, DK
                     <br>
-                    <span class="fa fa-calendar"></span> 04/2022 – &infin;
+                    <span class="fa fa-calendar-days"></span> 04/2022 – &infin;
                 </div>
                 <div class="exp-facts">
                     <span class="fas fa-user-cog"></span> Senior Security Engineer
                     <br>
-                    <span class="fa fa-wrench"></span> Azure, infrastructure, C#, .NET Core
+                    <span class="fa fa-wrench"></span> Azure, infrastructure, python
                 </div>
                 <div class="exp-summary">
                     <a href="https://www.mastercard.com/news/press/2021/september/mastercard-expands-open-banking-reach-with-acquisition-of-aiia/">Mastercard expands open banking reach with acquisition of Aiia</a>.
-                    TODO
+                    <!-- TODO: mere info -->
                     <ul>
-                        <li>TODO</li>
+                        <li>Azure Active Directory &mdash; hardening, cleanup, management</li>
+                        <li>Sentinel               &mdash; SOC, monitoring</li>
+                        <li>Azure Managed HSM      &mdash; provinsioning, management</li>
                     </ul>
                 </div>
             </div>
 
             <div class="exp">
                 <div class="exp-company">
-                    <span style="font-size: 16px">Aiia</span> <a href="https://aiia.eu/"><span class="fa fa-external-link"></span></a>
+                    <span style="font-size: 16px">Aiia</span> <a href="https://aiia.eu/"><span class="fa fa-2xs fa-external-link"></span></a>
                 </div>
                 <div class="exp-facts">
-                    <span class="fa fa-map-marker"></span> Amager
+                    <span class="fa fa-map-marker"></span> Amager, DK
                     <br>
-                    <span class="fa fa-calendar"></span> 08/2021 – 04/2022
+                    <span class="fa fa-calendar-days"></span> 08/2021 – 04/2022
                 </div>
                 <div class="exp-facts">
                     <span class="fas fa-user-cog"></span> Lead Security Engineer
@@ -103,9 +112,9 @@
                     <i>Spiir</i> became <i>Nordic API Gateway</i> became <i>Aiia</i> and the end of the end of the <i>reversing</i>-era occurred.
                     PSD2 meant new challenges and a ton of new solutions to audit and pentest.
                     <ul>
-                        <li>ASP.NET Core - API security</li>
-                        <li>mTLS, x509, eIDAS</li>
-                        <li>Internal pentest of systems</li>
+                        <li>ASP.NET Core &mdash; API security</li>
+                        <li>mTLS, x.509, QWAC/QSeal &mdash; Lot's of non-standard TLS fun</li>
+                        <li>Internal pentest of homegrown systems</li>
                         <li>Audit implementations of OAuth2</li>
                     </ul>
                 </div>
@@ -113,12 +122,12 @@
 
             <div class="exp">
                 <div class="exp-company">
-                    <span style="font-size: 16px">Nordic API Gateway</span> <a href="https://www.nordicapigateway.com/"><span class="fa fa-external-link"></span></a>
+                    <span style="font-size: 16px">Nordic API Gateway</span> <a href="https://www.nordicapigateway.com/"><span class="fa fa-2xs fa-external-link"></span></a>
                 </div>
                 <div class="exp-facts">
-                    <span class="fa fa-map-marker"></span> Christianshavn
+                    <span class="fa fa-map-marker"></span> Christianshavn, DK
                     <br>
-                    <span class="fa fa-calendar"></span> 09/2019 – 08/2021
+                    <span class="fa fa-calendar-days"></span> 09/2019 – 08/2021
                 </div>
                 <div class="exp-facts">
                     <span class="fas fa-user-cog"></span> Reverse Engineer
@@ -138,12 +147,12 @@
 
             <div class="exp">
                 <div class="exp-company">
-                    <span style="font-size: 16px">Novozymes</span> <a href="https://novozymes.com"><span class="fa fa-external-link"></span></a>
+                    <span style="font-size: 16px">Novozymes</span> <a href="https://novozymes.com"><span class="fa fa-2xs fa-external-link"></span></a>
                 </div>
                 <div class="exp-facts">
-                    <span class="fa fa-map-marker"></span> Bagsværd
+                    <span class="fa fa-map-marker"></span> Bagsværd, DK
                     <br>
-                    <span class="fa fa-calendar"></span> 02/2016 – 08/2019
+                    <span class="fa fa-calendar-days"></span> 02/2016 – 08/2019
                 </div>
                 <div class="exp-facts">
                     <span class="fas fa-user-cog"></span> Student helper (DevOps)
@@ -173,15 +182,15 @@
                 <div class="exp-facts">
                     <span class="fa fa-map-marker"></span> Technical University of Denmark
                     <br>
-                    <span class="fa fa-calendar"></span> 2017 &mdash; 2019
+                    <span class="fa fa-calendar-days"></span> 2017 &mdash; 2019
                 </div>
                 <div class="exp-facts">
                     <span class="fas fa-user-graduate"></span> Student
                     <br>
                     <span class="fa fa-wrench"></span> Python3, Java, Linux
                 </div>
-                <div>
-                    The title of my master thesis is &ldquo;Analyzing the security of IoT devices&rdquo; in which I wrote about when <a href="https://cwe.mitre.org/data/">weaknesses</a> turns into <a href="https://cve.mitre.org/">vulnerabilities</a>, using a lot of data from MITRE (CVE, CVSS, CWE &amp; CAPEC).<br/>
+                <details open>
+                    <summary>The title of my master thesis is &ldquo;Analyzing the security of IoT devices&rdquo; in which I wrote about when <a href="https://cwe.mitre.org/data/">weaknesses</a> turns into <a href="https://cve.mitre.org/">vulnerabilities</a>, using a lot of data from MITRE (CVE, CVSS, CWE &amp; CAPEC).<br/></summary>
                     I had the following courses at DTU during my master:
                     <ul style="columns: 2; list-style: none; margin-left: 0">
                         <li><i class="fas fa-shield-alt fa-fw"></i> <a href="https://kurser.dtu.dk/course/01426" title="ECTS: 5">Cryptology 2</a></li>
@@ -204,7 +213,7 @@
 
                         <li><i class="fas fa-chart-line fa-fw"></i> <a href="https://kurser.dtu.dk/course/42435" title="ECTS: 5">Knowledge-based Entrepreneurship</a></li>
                     </ul>
-                </div>
+                </details>
             </div>
             <div class="exp">
                 <div class="exp-company">
@@ -213,16 +222,15 @@
                 <div class="exp-facts">
                     <span class="fa fa-map-marker"></span> Technical University of Denmark
                     <br>
-                    <span class="fa fa-calendar"></span> 2013 &mdash; 2017
+                    <span class="fa fa-calendar-days"></span> 2013 &mdash; 2017
                 </div>
                 <div class="exp-facts">
                     <span class="fas fa-user-graduate"></span> Student
                     <br>
                     <span class="fa fa-wrench"></span> Java, Python, C, F#
                 </div>
-                <div>
-                    My bachelor was in &ldquo;Software-Based Fault Tolerant Virtualization Layer Using Sector-Disk Codes&rdquo;.<br/>
-                    <!-- GPA for bachelor: 7.8.<br/> -->
+                <details open>
+                    <summary>My bachelor was in &ldquo;Software-Based Fault Tolerant Virtualization Layer Using Sector-Disk Codes&rdquo;.<br/></summary>
                     I had the following courses at DTU during my bachelor:
                     <ul style="columns: 2; list-style: none; margin-left: 0">
                         <li><i class="fas fa-shield-alt fa-fw"></i> <a href="https://kurser.dtu.dk/course/01410" title="ECTS: 5">Cryptology 1</a></li>
@@ -243,7 +251,7 @@
                         <li><i class="fas fa-laptop-code fa-fw"></i> <a href="https://kurser.dtu.dk/course/02257" title="ECTS: 5">Applied Functional Programming</a></li>
                         <li><i class="fas fa-laptop-code fa-fw"></i> <a href="https://kurser.dtu.dk/course/02158" title="ECTS: 5">Concurrent Programming</a></li>
                         <li><i class="fas fa-laptop-code fa-fw"></i> <a href="https://kurser.dtu.dk/course/02161" title="ECTS: 5">Software Engineering 1</a></li>
-                        <li><i class="fab fa-windows fa-fw"></i> <a href="https://kurser.dtu.dk/course/02350" title="ECTS: 5">Windows Programming using C# and .NET</a></li>
+                        <li><i class="fab fa-windows fa-fw"></i> <a href="https://kurser.dtu.dk/course/02350" title="ECTS: 5"><!--Windows--> Programming using C# and .NET</a></li>
                         <li><i class="fas fa-database fa-fw"></i> <a href="https://kurser.dtu.dk/course/02122" title="ECTS: 10">Software Technology Project</a></li>
 
                         <li><i class="fas fa-laptop-code fa-fw"></i> <a href="https://kurser.dtu.dk/course/02101" title="ECTS: 5">Introductory Programming</a></li>
@@ -256,7 +264,7 @@
                     </ul>
                     <!--And furthermore I did a special course about <a href="#" title="ECTS: 7.5.">Ensuring Properties of Solidity Contracts</a>.-->
                     And furthermore I did a special course about &ldquo;Ensuring Properties of Solidity Contracts&rdquo;.
-                </div>
+                </details>
             </div>
 
             <div style="page-break-after: always;"></div>
@@ -268,11 +276,14 @@
                     <ul style="columns: 2; list-style: none; margin-left: 0">
                         <li><i class="fab fa-python fa-fw"></i> Python3</li>
                         <li><i class="fab fa-linux fa-fw"></i> Linux</li>
-                        <li><i class="fas fa-code-branch  fa-fw"></i> git</li>
-                        <li><i class="fas fa-database fa-fw"></i> SQL</li>
+                        <li><i class="fas fa-cloud fa-fw"></i> Azure</li>
+                        <li><i class="fas fa-code-branch fa-fw"></i> git</li>
+                        <li><i class="fas fa-laptop-code fa-fw"></i> C#</li>
                         <li><i class="fab fa-js fa-fw"></i> JavaScript</li>
+                        <li><i class="fab fa-android fa-fw"></i> Frida</li>
                         <li><i class="fas fa-scroll fa-fw"></i> (Bash-)scripting</li>
-                        <li>&nbsp;</li>
+                        <li><i class="fas fa-database fa-fw"></i> SQL</li>
+                        <!--<li>&nbsp;</li>-->
                         <li title="...and much more">&hellip;</li>
                     </ul>
                     But am willing to learn new tools, languages, and platforms.
@@ -291,8 +302,8 @@
                         <li><a href="https://postmarkapp.com/support/article/779-responsible-disclosure-policy">Postmark (Wildbit) Hall-of-Fame</a></li>
                         <li><a href="https://www.infosecurity.dk/seminar/S207">Paneldebat: Hvordan tiltrækker vi it-studerende til it-sikkerhedsfaget?</a></li>
                         <li>Key note presentation at <a href="https://web.archive.org/web/20190410173951/https://www.conferencemanager.dk/smartcitycybersecurityhack/programme.html">Smart City & Cyber Security Hack 2019</a></li>
-                        <li><a href="https://www.dr.dk/radio/p1/orientering/orientering-2018-TODO">P1: Orientering</a> (2018)</li>
-                        <li><a href="https://www.dr.dk/tv/se/21-soendag/21-soendag-dr1/21-soendag-2018-10-21">DR: 21 Søndag</a> (21. okt. 2018)</li>
+                        <!-- <li><a href="https://www.dr.dk/radio/p1/orientering/orientering-2018-TODO">P1: Orientering</a> (2018)</li> -->
+                        <!-- <li><a href="https://www.dr.dk/tv/se/21-soendag/21-soendag-dr1/21-soendag-2018-10-21">DR: 21 Søndag</a> (21. okt. 2018)</li> -->
                         <li>&ldquo;<a href="https://fe-ddis.dk/Nyheder/nyhedsarkiv/2018/Pages/Cyberlandsholdet_k%C3%A6mpeoplevelse.aspx"><i>Cyberlandsholdet har været en kæmpe oplevelse [...]</i></a>&rdquo; siger Nicolai Søborg, som er holdkaptajn for Cyberlandsholdet (2018).</li>
                         <li><a href="https://fe-ddis.dk/Cyberlandsholdet/Pages/Cyberlandsholdet2017.aspx">Cyberlandsholdet 2017</a> (fe-ddis.dk/Cyberlandsholdet/Pages/Cyberlandsholdet2017.aspx)</li>
                     </ul>

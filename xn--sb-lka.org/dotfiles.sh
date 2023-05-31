@@ -1,5 +1,6 @@
 git clone --bare https://github.com/NicolaiSoeborg/dotfiles.git $HOME/.dotfiles
 git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout
+# apt install locales
 locale-gen en_DK.UTF-8
 source ~/.bash_aliases
 dotfiles config --local status.showUntrackedFiles no

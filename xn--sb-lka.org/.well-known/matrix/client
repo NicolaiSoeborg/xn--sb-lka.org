@@ -1,5 +1,8 @@
 {
     "m.homeserver": {
         "base_url": "https://matrix.xn--sb-lka.org/"
+    },
+    "org.matrix.msc3575.proxy": {
+        "url": "https://matrix.xn--sb-lka.org/"
     }
 }

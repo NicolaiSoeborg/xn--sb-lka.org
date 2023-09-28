@@ -7,9 +7,14 @@
   <changefreq>monthly</changefreq>
 </url>
 <url>
-  <loc>https://xn--sb-lka.org/cv/index.html</loc>
+  <loc>https://xn--sb-lka.org/cv/</loc>
   <priority>0.75</priority>
-  <changefreq>weekly</changefreq>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>https://xn--sb-lka.org/password/</loc>
+  <priority>0.74</priority>
+  <changefreq>monthly</changefreq>
 </url>
 <url>
   <loc>https://badger.xn--sb-lka.org/</loc>

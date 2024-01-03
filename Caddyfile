@@ -17,13 +17,13 @@
 	header {
 		-Server
 		Expect-CT report-uri="https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110",enforce,max-age=86400
-		Content-Security-Policy "default-src 'self'; frame-ancestors 'none'; base-uri 'none'; connect-src https://*:* o393671.ingest.sentry.io https://matrix.cactus.chat:8448; script-src 'self' https://cdn.bokeh.org https://latest.cactus.chat/cactus.js https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/intro.min.js; img-src 'self' data: i.ytimg.com; style-src 'unsafe-inline' 'self' use.fontawesome.com fonts.googleapis.com *.bootstrapcdn.com https://latest.cactus.chat/style.css cdnjs.cloudflare.com latex.now.sh; font-src 'self' use.fontawesome.com fonts.googleapis.com fonts.gstatic.com latex.now.sh; frame-src 'self' www.youtube-nocookie.com; report-uri https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110"
+		Content-Security-Policy "default-src 'self'; frame-ancestors 'none'; base-uri 'none'; connect-src https://*:* o393671.ingest.sentry.io https://matrix.cactus.chat:8448; script-src 'self' https://cdn.bokeh.org https://latest.cactus.chat/cactus.js https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/intro.min.js https://maps.googleapis.com ; img-src 'self' data: i.ytimg.com; style-src 'unsafe-inline' 'self' use.fontawesome.com fonts.googleapis.com *.bootstrapcdn.com https://latest.cactus.chat/style.css cdnjs.cloudflare.com latex.now.sh; font-src 'self' use.fontawesome.com fonts.googleapis.com fonts.gstatic.com latex.now.sh; frame-src 'self' www.youtube-nocookie.com; report-uri https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110"
 		Strict-Transport-Security "max-age=31537331; includeSubDomains; preload"
 		X-XSS-Protection 0
 		X-Content-Type-Options nosniff
 		X-Frame-Options DENY
 		X-Powered-By "Hamster in a wheel"
-		Referrer-Policy "no-referrer, strict-origin-when-cross-origin"
+		Referrer-Policy "no-referrer"
 		Permissions-Policy "interest-cohort=()"
 		Tk N
 	}
@@ -70,7 +70,7 @@ www.xn--sb-lka.org, ErDetBedstForAlle.xn--sb-lka.org {
 	import sec_headers
 	header Content-Type text/html
 	templates
-	respond "<!DOCTYPE html><meta charset=utf-8><title>{http.request.host}</title><body>{args.0}</body>"
+	respond "<!DOCTYPE html><meta charset=utf-8><title>{http.request.host}</title><body>{args[0]}</body>"
 }
 
 (json_reply) {
@@ -79,7 +79,7 @@ www.xn--sb-lka.org, ErDetBedstForAlle.xn--sb-lka.org {
 		mime application/json
 	}
 	header Content-Type application/json
-	respond "{args.0}"
+	respond "{args[0]}"
 }
 
 ip.xn--sb-lka.org, ipv4.xn--sb-lka.org, ipv6.xn--sb-lka.org {
@@ -102,7 +102,7 @@ info.xn--sb-lka.org {
 (tls_reply) {
 	import std_settings
 	tls {
-		protocols {args.0} {args.1}
+		protocols {args[0]} {args[1]}
 	}
 	header Access-Control-Allow-Origin "*"
 	import json_reply {"tls_version":"{tls_version}","alpn":"{http.request.tls.proto}","sni":"{http.request.tls.server_name}","cipher_suite":"{http.request.tls.cipher_suite}"}
@@ -129,9 +129,9 @@ tls.xn--sb-lka.org {
 
 (http_reply) {
 	tls {
-		alpn "{args.0}"
+		alpn "{args[0]}"
 	}
-	map {args.0} {proto_name} {
+	map {args[0]} {proto_name} {
 		http/1.1 HTTP/1.1
 		h2 HTTP/2.0
 		h3 HTTP/3.0
@@ -163,14 +163,6 @@ xn--sb-lka.org {
 	header /.well-known/matrix/* Access-Control-Allow-Origin "*"
 	header /.well-known/matrix/client Content-Type "application/json"
 	header /.well-known/matrix/server Content-Type "application/json"
-	# @wat header_regexp allowedOrigin Origin https?://((app|develop)\.element.io)|localhost)(:[0-9]+)?)$
-	#reverse_proxy /_synapse/client/* localhost:8008
-	reverse_proxy /_matrix/* localhost:8008 {
-		# header_down Access-Control-Allow-Origin {http.regexp.allowedOrigin.0}
-		# header_down Access-Control-Allow-Origin "https://develop.element.io"  # Only 1 domain allowed :/
-		header_down Access-Control-Allow-Origin "*" # Only 1 domain allowed :/
-		# header_up Host {http.reverse_proxy.upstream.hostport}
-	}
 	# reverse_proxy /world-flute/save localhost:8331
 	header "Onion-Location" "http://so3borgdb6if7zhyano3qo4k46wuqnb2la3336h2lmlxdmgsz5jg6kad.onion{uri}"
 

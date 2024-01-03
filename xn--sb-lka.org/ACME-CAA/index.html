@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Enabling ACME CAA for Caddy webserver step by step guide">
+    <meta name="author" content="Nicolai Søborg">
+    <title>Enabling ACME-CAA (RFC-8657) for Caddy webserver</title>
+    <link href="bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  </head>
+<style>
+pre {
+    -moz-tab-size: 4;
+    -o-tab-size:   4;
+    tab-size:      4;
+}
+#changelog {
+    list-style-type: none
+}
+
+pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}/*!
+  Theme: StackOverflow Dark
+  Description: Dark theme as used on stackoverflow.com
+  Author: stackoverflow.com
+  Maintainer: @Hirse
+  Website: https://github.com/StackExchange/Stacks
+  License: MIT
+  Updated: 2021-05-15
+  Updated for @stackoverflow/stacks v0.64.0
+*/.hljs{color:#fff;background:#1c1b1b}.hljs-subst{color:#fff}.hljs-comment{color:#999}.hljs-attr,.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-section,.hljs-selector-tag{color:#88aece}.hljs-attribute{color:#c59bc1}.hljs-name,.hljs-number,.hljs-quote,.hljs-selector-id,.hljs-template-tag,.hljs-type{color:#f08d49}.hljs-selector-class{color:#88aece}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-string,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#b5bd68}.hljs-meta,.hljs-selector-pseudo{color:#88aece}.hljs-built_in,.hljs-literal,.hljs-title{color:#f08d49}.hljs-bullet,.hljs-code{color:#ccc}.hljs-meta .hljs-string{color:#b5bd68}.hljs-deletion{color:#de7176}.hljs-addition{color:#76c490}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
+</style>
+  <body>
+<div class="col-lg-8 mx-auto p-4 py-md-5">
+  <header class="d-flex pb-3 mb-5 border-bottom">
+    <span class="fs-4">
+      <a href="https://xn--sb-lka.org/" class="d-flex text-body-emphasis text-decoration-none">
+        SØB.ORG
+      </a> Enabling ACME-CAA for Caddy webserver
+    </span>
+  </header>
+
+  <main>
+    <!-- <h1 class="text-body-emphasis">Preface</h1> -->
+    <p class="fs-5">
+        TL;DR: Grab this value and jump to the last step:
+        <br>
+        <pre><code class="lang-bash"><span class="hljs-attribute">jq</span> -r <span class="hljs-string">'.location'</span> $(<span class="hljs-emphasis">sudo -u caddy</span> caddy environ | awk -F<span class="hljs-string">'='</span> <span class="hljs-string">'/^caddy.AppDataDir=/{print $2"/acme/acme-v02.api.letsencrypt.org-directory/users/*/caddy.json"}'</span>)
+</code></pre>
+    </p>
+    <br>
+
+    <div class="card">
+    <div class="card-header">Configuring Caddy</div>
+    <div class="card-body">
+    <p>
+    In your <code>Caddyfile</code> you should add an <a class="link-underline link-underline-opacity-25" href="https://caddyserver.com/docs/caddyfile/options#email">email</a> to the <a class="link-underline link-underline-opacity-25" href="https://caddyserver.com/docs/caddyfile/options"><em>Global Options Block</em></a>:
+        <pre><code>{
+	<strong>email demo@example.com</strong>
+}
+
+domain.tld {
+	⋯
+}
+</code></pre>
+        <p>If you haven&#39;t done so, then do it now and restart caddy.</p>
+    </p>
+    </div>
+    </div>
+    <br>
+
+    <div class="card">
+        <div class="card-header">Finding Caddy <code>AppDataDir</code></div>
+    <div class="card-body">
+    <p>If you run caddy as user <em>caddy</em> (i.e. if installing caddy from <code>apt</code> and running as a systemd
+    service), then prefix this command with <code>sudo -u caddy</code>:</p>
+<ul>
+    <li><code>caddy environ | grep caddy.AppDataDir</code></li>
+</ul>
+<p>This should output something like: <code>caddy.AppDataDir=/var/lib/caddy/.local/share/caddy</code></p>
+<p>In this case your (prod) ACME directory for <em>Let&#39;s Encrypt</em> is:</p>
+<ul>
+    <li><code><strong>/var/lib/caddy/.local/share/caddy/acme/acme-v02.api.letsencrypt.org-directory/users/demo@example.com/</strong></code>
+        <br>(Note: <code>demo@example.com</code> from <em>Global Options Block</em> in Caddyfile).</li>
+</ul>
+<p>In this directory you will find two files:</p>
+<code><strong>caddy.json</strong></code>:
+<pre><code class="lang-json">{
+	<span class="hljs-attr">"status"</span>: <span class="hljs-string">"valid"</span>,
+	<span class="hljs-attr">"contact"</span>: [
+		<span class="hljs-string">"mailto:demo@example.com"</span>
+	],
+	<span class="hljs-attr">"termsOfServiceAgreed"</span>: <span class="hljs-literal">true</span>,
+	<span class="hljs-attr">"orders"</span>: <span class="hljs-string">""</span>,
+	<span class="hljs-attr">"location"</span>: <span class="hljs-string">"<strong>https://acme-v02.api.letsencrypt.org/acme/acct/1333337</strong>"</span>
+}
+</code></pre>
+<p>This contains your <code>accounturi</code> (stored in <code>location</code>).</p>
+<code>caddy.key</code>:
+<pre><code>-----BEGIN EC PRIVATE KEY-----
+MIGfWW91IHNob3VsZCBvZmMgbm90IGxlYWsgeW91ciBwcml2YXRlIGtleSEgQnV0
+IEkgdGhpbmsgaXQgaXMgbmljZSB0byBoYXZlIHNvbWUgZHVtbXkgdGV4dCBvZiBy
+b3VnaGx5IHRoZSBzYW1lIHNpemUuIFRoaXMgd2lsbCBwcm9iYWJseSB0cmlnZ2Vy
+IGEgYnVuY2ggb2YgZmFsc2UgcG9zaXRpdmVzIGluIHNjYW5uZXJzCg==
+-----END EC PRIVATE KEY-----
+</code></pre>
+<p>You should of course keep your <code>.key</code> file private!
+<em>If</em> you need to setup Caddy on a new server, for the same domain, then you need to copy the <code>.key</code>-file and <code>caddy.json</code> to the new server. Otherwise ACME requests will fail on the new server. You should consider to take a backup of this file.
+    </p>
+    </div>
+    </div>
+    <br>
+
+    <div class="card">
+    <div class="card-header">Setting up DNS</div>
+    <div class="card-body">
+        <p>In your DNS panel create a <code>CAA</code> record with:</p>
+        <!--<ul style="list-style-type: none;">
+            <li><pre><code>128 issue "letsencrypt.org; accounturi=https://acme-v02.api.letsencrypt.org/acme/acct/1333337"</code></pre>
+            </li>
+            (flags=128 <sup><i>Issuer Critical Flag</i></sup>, tag=issue, value="letsencrypt.org; accounturi=…", including the quotes!)
+		</ul>-->
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">flags</th>
+              <th scope="col">tag</th>
+              <th scope="col">value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td scope="row">128</td>
+              <td>issue</td>
+              <td>"letsencrypt.org; accounturi=https://acme-v02.api.letsencrypt.org/acme/acct/1333337"</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Make sure to replace <code>1333337</code> with the value from <code>caddy.json</code>.<br>
+        You need DNSSEC to be enabled.</p>
+    </div>
+    </div>
+  </main>
+  <footer class="pt-5 my-5 text-body-secondary">
+    References
+    <ul>
+      <li><a href="https://community.letsencrypt.org/t/enabling-acme-caa-account-and-method-binding/189588">Enabling ACME CAA Account and Method Binding</a></li>
+      <li><a href="https://www.rfc-editor.org/rfc/rfc8657">RFC 8657: Certification Authority Authorization (CAA) Record Extensions for Account URI and Automatic Certificate Management Environment (ACME) Method Binding</a></li>
+    </ul>
+    <br/>
+    Changelog
+    <ul id="changelog">
+        <li>2024/01/03 » Change <code>flags</code> from 0 to 128<sup><i>Issuer Critical Flag</i></sup>. Thanks <a href="https://norrebro.space/@tykling@mastodon.social/111687892289510243">Tykling</a> for the suggestion.</li>
+    </ul>
+  </footer>
+</div>
+  </body>
+</html>

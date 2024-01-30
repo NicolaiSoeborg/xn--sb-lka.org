@@ -17,7 +17,8 @@
 	header {
 		-Server
 		Expect-CT report-uri="https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110",enforce,max-age=86400
-		Content-Security-Policy "default-src 'self'; frame-ancestors 'none'; base-uri 'none'; connect-src https://*:* o393671.ingest.sentry.io https://matrix.cactus.chat:8448; script-src 'self' https://cdn.bokeh.org https://latest.cactus.chat/cactus.js https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/intro.min.js https://maps.googleapis.com ; img-src 'self' data: i.ytimg.com; style-src 'unsafe-inline' 'self' use.fontawesome.com fonts.googleapis.com *.bootstrapcdn.com https://latest.cactus.chat/style.css cdnjs.cloudflare.com latex.now.sh; font-src 'self' use.fontawesome.com fonts.googleapis.com fonts.gstatic.com latex.now.sh; frame-src 'self' www.youtube-nocookie.com; report-uri https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110"
+		#Content-Security-Policy "default-src 'self'; frame-ancestors 'none'; base-uri 'none'; connect-src https://*:* o393671.ingest.sentry.io https://matrix.cactus.chat:8448; script-src 'self' https://cdn.bokeh.org https://latest.cactus.chat/cactus.js https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/intro.min.js https://maps.googleapis.com ; img-src 'self' data: i.ytimg.com; style-src 'unsafe-inline' 'self' use.fontawesome.com fonts.googleapis.com *.bootstrapcdn.com https://latest.cactus.chat/style.css cdnjs.cloudflare.com latex.now.sh; font-src 'self' use.fontawesome.com fonts.googleapis.com fonts.gstatic.com latex.now.sh; frame-src 'self' www.youtube-nocookie.com; report-uri https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110"
+		Content-Security-Policy-Report-Only "default-src 'self'; frame-ancestors 'none'; base-uri 'none'; connect-src https://*:* o393671.ingest.sentry.io https://matrix.cactus.chat:8448; script-src 'self' https://cdn.bokeh.org https://latest.cactus.chat/cactus.js https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/intro.min.js https://maps.googleapis.com ; img-src 'self' data: i.ytimg.com; style-src 'unsafe-inline' 'self' use.fontawesome.com fonts.googleapis.com *.bootstrapcdn.com https://latest.cactus.chat/style.css cdnjs.cloudflare.com latex.now.sh; font-src 'self' use.fontawesome.com fonts.googleapis.com fonts.gstatic.com latex.now.sh; frame-src 'self' www.youtube-nocookie.com; report-uri https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110"
 		Strict-Transport-Security "max-age=31537331; includeSubDomains; preload"
 		X-XSS-Protection 0
 		X-Content-Type-Options nosniff
@@ -85,6 +86,8 @@ www.xn--sb-lka.org, ErDetBedstForAlle.xn--sb-lka.org {
 ip.xn--sb-lka.org, ipv4.xn--sb-lka.org, ipv6.xn--sb-lka.org {
 	import std_settings
 	header Access-Control-Allow-Origin "*"
+	#redir /whois https://rdap.arin.net/registry/ip/{{.RemoteIP}} temporary
+	redir /whois/* https://rdap.arin.net/registry/ip/{file} permanent
 	route /json {
 		import json_reply {"ip":"{{.RemoteIP}}","country":"todo"}
 	}
@@ -169,9 +172,13 @@ xn--sb-lka.org {
 	# WebFinger
 	header /.well-known/webfinger Content-Type "application/json"
 	# OASIS Open
-	redir /.well-known/host-meta https://norrebro.space{uri} 301
+	redir /.well-known/host-meta https://norrebro.space{uri} permanent
 	# Diaspora discovery
 	header /.well-known/nodeinfo Content-Type "application/json; profile=\"http://nodeinfo.diaspora.software/ns/schema/2.0#\""
+
+	# new files domain:
+	@is_static `path('/android.*') || path('/dotfiles.sh') || path('/hackervandfald.html')`
+	redir @is_static https://files.xn--sb-lka.org/{dir}{file} permanent
 
 	# Smittestop
 	templates /smittestop/
@@ -190,7 +197,8 @@ xn--sb-lka.org {
 	file_server /ctf-writeups/* {
 		root /var/lib/caddy/www/xn--sb-lka.org/
 		#index README.md
-		browse
+		browse /var/lib/caddy/www/template.tpl
+		hide .git
 	}
 
 	file_server {

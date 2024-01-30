@@ -1,3 +1,4 @@
+from typing import List
 from random import shuffle, choice
 
 NUM_CARDS_START = 3
@@ -39,7 +40,7 @@ def can_play_card(card: Card, gamestate):
         return True
     return False
 
-def remove_card_from_hand(card: Card, hand: list[Card]) -> list[Card]:
+def remove_card_from_hand(card: Card, hand: List[Card]) -> List[Card]:
     new_hand = []
     has_removed_card = False
     for card_on_hand in hand:
@@ -62,7 +63,7 @@ def still_playing(players):
 
 
 class Player:
-    def __init__(self, name, hand: list[Card]) -> None:
+    def __init__(self, name, hand: List[Card]) -> None:
         self.name = name
         self.hand = hand
 

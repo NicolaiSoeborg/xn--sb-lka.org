@@ -2,21 +2,19 @@
 
 1. Download frida-tools (`pipx install frida-tools`). See <https://frida.re/>
 
-2. Download frida-server for your device (arm/x86/x64):
+2. Download frida-server for your device (arm(64)/x86/x64):
 
 Protip: No idea which arch? Download all of them!
 
 ```bash
-wget https://github.com/frida/frida/releases/download/15.0.17/frida-server-15.0.17-android-arm.xz
-wget https://github.com/frida/frida/releases/download/15.0.17/frida-server-15.0.17-android-arm64.xz
-wget https://github.com/frida/frida/releases/download/15.0.17/frida-server-15.0.17-android-x86.xz
-wget https://github.com/frida/frida/releases/download/15.0.17/frida-server-15.0.17-android-x86_64.xz
+wget $(curl https://api.github.com/repos/frida/frida/releases/latest | jq -r '.assets | .[] | select(.name | test("server-.+-android")) | .browser_download_url')
 
 unxz frida-server-*-android-*.xz
 adb push frida-server-*-android-* /data/local/tmp/
 adb shell
 cd /data/local/tmp/
 chmod 755 frida-server-*
+ls
 ./frida-server-*  # <-- need to specify arch
 ```
 
@@ -25,10 +23,10 @@ chmod 755 frida-server-*
 4. Running frida
 
 ```bash
-frida --usb -f dk.rejsekort.checkudvej --no-pause --runtime=v8 -l script.js
+frida --usb -f dk.rejsekort.checkudvej --runtime=v8 -l script.js
 
 # Or use premade MITM unpinning script:
-frida --usb -f dk.rejsekort.checkudvej --no-pause --runtime=v8 --codeshare akabe1/frida-multiple-unpinning
+frida --usb -f dk.rejsekort.checkudvej --runtime=v8 --codeshare akabe1/frida-multiple-unpinning
 ```
 
 # App management
@@ -61,16 +59,29 @@ adb pull "/full/path/base.apk"
 
 <https://raccoon.onyxbits.de/blog/install-split-apk-adb/>
 
+## Display mirroring
+
+```bash
+scrcpy --show-touches --always-on-top
+```
+
 # Decompiling apps
 
 Download the app to your computer and install "jadx".
 
 ```bash
-jadx --show-bad-code --deobf --deobf-min 2 --deobf-use-sourcename --deobf-parse-kotlin-metadata someapp.apk
+jadx --show-bad-code --no-debug-info --deobf --deobf-min 2 --deobf-use-sourcename --use-kotlin-methods-for-var-names=apply-and-hide someapp.apk
 
 # Check for interesting strings/urls
 cat base/resources/res/values/strings.xml 
 ```
+
+## Interactive Debugging
+
+Problem: The frida REPL is somewhat limited (e.g. tedious to wrap everything in `Java.perform(() => { ... })`)
+
+Solution: Start frida with argument `--debug`, then open Chromium and go to `chrome://inspect` => `Open dedicated DevTools for Node`
+Now you have a "proper" REPL where auto-complete works and no need to wrap Java bindings in _Java.perform()_.
 
 # Proxying
 

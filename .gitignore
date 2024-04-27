@@ -1,6 +1,5 @@
 */.well-known/acme-challenge
 
-badger.xn--sb-lka.org
-www.xn--sb-lka.org
+xn--sb-lka.org/rapport.*.html
 
 hidden_service/hs_*

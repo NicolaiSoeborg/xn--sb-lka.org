@@ -6,7 +6,9 @@
 (std_settings) {
 	encode zstd gzip
 	log {
-		output file /var/log/caddy/access.log
+		output file /var/log/caddy/access.log {
+			roll_keep 500
+		}
 	}
 	# block accidental exposure of git
 	respond /.git/* 403
@@ -17,8 +19,8 @@
 	header {
 		-Server
 		Expect-CT report-uri="https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110",enforce,max-age=86400
-		#Content-Security-Policy "default-src 'self'; frame-ancestors 'none'; base-uri 'none'; connect-src https://*:* o393671.ingest.sentry.io https://matrix.cactus.chat:8448; script-src 'self' https://cdn.bokeh.org https://latest.cactus.chat/cactus.js https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/intro.min.js https://maps.googleapis.com ; img-src 'self' data: i.ytimg.com; style-src 'unsafe-inline' 'self' use.fontawesome.com fonts.googleapis.com *.bootstrapcdn.com https://latest.cactus.chat/style.css cdnjs.cloudflare.com latex.now.sh; font-src 'self' use.fontawesome.com fonts.googleapis.com fonts.gstatic.com latex.now.sh; frame-src 'self' www.youtube-nocookie.com; report-uri https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110"
-		Content-Security-Policy-Report-Only "default-src 'self'; frame-ancestors 'none'; base-uri 'none'; connect-src https://*:* o393671.ingest.sentry.io https://matrix.cactus.chat:8448; script-src 'self' https://cdn.bokeh.org https://latest.cactus.chat/cactus.js https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/intro.min.js https://maps.googleapis.com ; img-src 'self' data: i.ytimg.com; style-src 'unsafe-inline' 'self' use.fontawesome.com fonts.googleapis.com *.bootstrapcdn.com https://latest.cactus.chat/style.css cdnjs.cloudflare.com latex.now.sh; font-src 'self' use.fontawesome.com fonts.googleapis.com fonts.gstatic.com latex.now.sh; frame-src 'self' www.youtube-nocookie.com; report-uri https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110"
+		# unsafe-eval used by plotly (danske-love)
+		Content-Security-Policy-Report-Only "default-src 'self'; frame-ancestors 'none'; base-uri 'none'; connect-src https://*:* o393671.ingest.sentry.io https://matrix.cactus.chat:8448; script-src 'self' 'unsafe-eval' https://cdn.plot.ly/plotly-latest.min.js https://latest.cactus.chat/cactus.js https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/intro.min.js https://maps.googleapis.com ; img-src 'self' data: i.ytimg.com *.blob.core.windows.net; style-src 'unsafe-inline' 'self' use.fontawesome.com fonts.googleapis.com *.bootstrapcdn.com https://latest.cactus.chat/style.css cdnjs.cloudflare.com; font-src 'self' use.fontawesome.com fonts.googleapis.com fonts.gstatic.com; frame-src 'self' www.youtube-nocookie.com; report-uri https://o393671.ingest.sentry.io/api/5363045/security/?sentry_key=9b4ca50af1d6463c86e551c9ca00c110"
 		Strict-Transport-Security "max-age=31537331; includeSubDomains; preload"
 		X-XSS-Protection 0
 		X-Content-Type-Options nosniff
@@ -31,16 +33,8 @@
 }
 
 http://so3borgdb6if7zhyano3qo4k46wuqnb2la3336h2lmlxdmgsz5jg6kad.onion {
-	# Not sure if this is a bug with "caddy adapt" or if caddy actually tries
-	# to request ACME certs for `.onion`, but this seems to disable it
-	#tls internal {
-	#	on_demand
-	#}
-	#bind 127.0.0.1
-	@onlylocal {
-		remote_ip 127.0.0.1
-	}
-	file_server @onlylocal {
+	bind 127.0.0.1
+	file_server {
 		root /var/lib/caddy/www/xn--sb-lka.org/
 	}
 }
@@ -52,9 +46,9 @@ badger.xn--sb-lka.org, mta-sts.xn--sb-lka.org, bedstforalle.xn--sb-lka.org, tor.
 	}
 }
 
-#157.230.112.120:80/* {
-#	respond "Hello World"
-#}
+135.181.87.135:80 {
+	respond "Hello World"
+}
 
 www.xn--sb-lka.org, ErDetBedstForAlle.xn--sb-lka.org {
 	import sec_headers
@@ -145,6 +139,14 @@ tls.xn--sb-lka.org {
 }
 
 http.xn--sb-lka.org {
+	handle_path /headers {
+		header "Content-Type" "application/json"
+		templates {
+			# By default placeholders are not replaced for json
+			mime application/json
+		}
+		respond `{{ .Req.Header | mustToPrettyJson }}`
+	}
 	import html_reply "You are connected with {http.request.proto} ({tls_version}, {tls_cipher})."
 }
 http1.xn--sb-lka.org, http11.xn--sb-lka.org {
@@ -158,6 +160,12 @@ http3.xn--sb-lka.org {
 }
 
 ##### END SERVICES #####
+
+matrix.xn--sb-lka.org {
+	rewrite /_matrix/client/r0/room_keys/keys /_matrix/client/v3/room_keys/keys?{query}
+	skip_log /_matrix/federation/v1/send/*
+	reverse_proxy /_matrix/* localhost:6167
+}
 
 xn--sb-lka.org {
 	import sec_headers

@@ -46,8 +46,9 @@ badger.xn--sb-lka.org, mta-sts.xn--sb-lka.org, bedstforalle.xn--sb-lka.org, tor.
 	}
 }
 
-135.181.87.135:80 {
-	respond "Hello World"
+http://135.181.87.135:80 {
+	# respond "Hello World"
+	reverse_proxy localhost:2816
 }
 
 www.xn--sb-lka.org, ErDetBedstForAlle.xn--sb-lka.org {

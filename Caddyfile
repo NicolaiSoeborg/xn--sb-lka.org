@@ -1,15 +1,16 @@
 {
 	admin off
+	log {
+		output file /var/log/caddy/access.log {
+			roll_keep 500
+		}
+		level debug
+	}
 	email caddy@xn--sb-lka.org
 }
 
 (std_settings) {
 	encode zstd gzip
-	log {
-		output file /var/log/caddy/access.log {
-			roll_keep 500
-		}
-	}
 	# block accidental exposure of git
 	respond /.git/* 403
 }
@@ -25,7 +26,7 @@
 		X-XSS-Protection 0
 		X-Content-Type-Options nosniff
 		X-Frame-Options DENY
-		X-Powered-By "Hamster in a wheel"
+		X-Powered-By "Hamster in a wheel 🐹🛞"
 		Referrer-Policy "no-referrer"
 		Permissions-Policy "interest-cohort=()"
 		Tk N
@@ -164,7 +165,7 @@ http3.xn--sb-lka.org {
 
 matrix.xn--sb-lka.org {
 	rewrite /_matrix/client/r0/room_keys/keys /_matrix/client/v3/room_keys/keys?{query}
-	skip_log /_matrix/federation/v1/send/*
+	log_skip /_matrix/federation/v1/send/*
 	reverse_proxy /_matrix/* localhost:6167
 }
 

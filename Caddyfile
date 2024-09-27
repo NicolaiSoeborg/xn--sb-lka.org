@@ -33,8 +33,9 @@
 	}
 }
 
-http://so3borgdb6if7zhyano3qo4k46wuqnb2la3336h2lmlxdmgsz5jg6kad.onion {
-	bind 127.0.0.1
+http://so3borgdb6if7zhyano3qo4k46wuqnb2la3336h2lmlxdmgsz5jg6kad.onion:80 {
+	# we cant bind to 127.0.0.1 as this will make the route more specific and break http->https redir(!?)
+	#bind 127.0.0.1
 	file_server {
 		root /var/lib/caddy/www/xn--sb-lka.org/
 	}
@@ -52,13 +53,21 @@ http://135.181.87.135:80 {
 	reverse_proxy localhost:2816
 }
 
-www.xn--sb-lka.org, ErDetBedstForAlle.xn--sb-lka.org {
+37.ax, mta-sts.37.ax, www.xn--sb-lka.org, ErDetBedstForAlle.xn--sb-lka.org {
 	import sec_headers
 	map {host} {new_host} {
 		ErDetBedstForAlle.xn--sb-lka.org "bedstforalle.xn--sb-lka.org"
+		37.ax "13.37.ax"
+		mta-sts.37.ax "xn--sb-lka.org"
 		default "xn--sb-lka.org"
 	}
 	redir https://{new_host}{uri} permanent
+}
+
+13.37.ax {
+	import sec_headers
+	respond "HELLO"
+	#reverse_proxy http://127.0.0.1:8000
 }
 
 ##### SERVICES #####
@@ -207,7 +216,7 @@ xn--sb-lka.org {
 	file_server /ctf-writeups/* {
 		root /var/lib/caddy/www/xn--sb-lka.org/
 		#index README.md
-		browse /var/lib/caddy/www/template.tpl
+		browse
 		hide .git
 	}
 

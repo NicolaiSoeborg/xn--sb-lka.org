@@ -199,14 +199,6 @@ xn--sb-lka.org {
 	@is_static `path('/android.*') || path('/dotfiles.sh') || path('/hackervandfald.html')`
 	redir @is_static https://files.xn--sb-lka.org/{dir}{file} permanent
 
-	# Smittestop
-	templates /smittestop/
-	templates /smittestop/index.html
-	file_server /smittestop/* {
-		root /var/lib/caddy/www/xn--sb-lka.org/
-		browse #/var/lib/caddy/www/xn--sb-lka.org/smittestop/browse/browse.tpl
-	}
-
 	# CTF-Writeups:
 	header /ctf-writeups/*.md {
 		# Sadly this doesn't work in FF: https://bugzilla.mozilla.org/show_bug.cgi?id=1319262
